@@ -10,8 +10,14 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/laucn
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.Div([html.H1("3D-Surface plots")], style={
-        'textAlign': "center"
+    html.Div([html.H1("3D-Surface Plots")],className="row", style={
+        'textAlign': "center",
+        'border-style': 'outset',
+        'border-color': '#ffffcc',
+        "background-color":'#ffffcc',
+        "margin-left": "auto",
+        "margin-right": "auto",
+         "color": "#8533eb"
     }),
     html.Div([
         dcc.Dropdown(id="state-selected",
@@ -22,16 +28,16 @@ app.layout = html.Div([
                          "margin-left": "auto",
                          "margin-right": "auto",
                          "width": "50%",
-                         'textAlign': "center"
+                         'textAlign': "center",
 
                      }
                      )
-    ], style={
+    ],className="row" ,style={
         'padding-top': 20
     }),
     dcc.Graph(id="my-graph"),
 
-])
+],style={"margin": "50px"})
 
 
 @app.callback(
@@ -51,10 +57,9 @@ def update_figure(selected):
         "layout": go.Layout(
             title='Employment rate',
             autosize=False,
-            # scene={'camera': dict(eye ={'x':1, 'y': 0.88, 'z': -0.64})},
             width=1000,
             height=650,
-            # margin={'l': 65, 'r': 50, 'b': 65, 't': 90}
+            margin={'l': 65, 'r': 50, 'b': 65, 't': 90}
 
         )
 
