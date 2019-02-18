@@ -27,7 +27,7 @@ app.layout = html.Div([
                          "display": "block",
                          "margin-left": "auto",
                          "margin-right": "auto",
-                         "width": "50%",
+                         "width": "60%",
                          'textAlign': "center",
 
                      }
@@ -55,7 +55,7 @@ def update_figure(selected):
     return {
         "data": trace,
         "layout": go.Layout(
-            title='Employment rate',
+            title=f'Employment rate for the state:FIPS Code({selected})',
             autosize=False,
             width=1000,
             height=650,

@@ -1,9 +1,9 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import pandas as pd
 # from plotly import tools
 import plotly.graph_objs as go
-import pandas as pd
 from dash.dependencies import Input, Output
 
 df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/mtl2013ternary.csv")
@@ -16,19 +16,19 @@ app.layout = html.Div([
     html.Div([
         html.H1("Montreal 2013")
 
-    ], className="eight columns offset-by-two", style={'textAlign': "center", 'padding-right': 150}),
+    ], style={'textAlign': "center"}),
     html.Div([
         dcc.RadioItems(id="selected-result",
-                       options=[{"label": i, "value": i} for i in df.result.unique()],
+                       options=[{"label": i.title(), "value": i} for i in df.result.unique()],
                        value="plurality",
                        labelStyle={'display': 'inline-block'}
                        )], style={
-                                'padding-right': 600,
-                                'padding-left': 400,
-                                'textAlign': 'center'
-                        }),
-    html.Div([
-        dcc.Graph(id="my-graph")], className="eight columns offset-by-two")
+        'position': 'relative',
+
+        "text-align": "center",
+    }),
+
+    dcc.Graph(id="my-graph")
 
 ])
 
@@ -42,13 +42,22 @@ def update_figure(selected):
     trace = go.Heatmap(
         y=dff["district"].values,
         x=["Coderre", "Bergeron", "Joly"],
-        z=dff[["Coderre", "Bergeron", "Joly"]].values
+        z=dff[["Coderre", "Bergeron", "Joly"]].values,
+        colorscale='Viridis',
+        showscale=True
     )
     return {
 
         "data": [trace],
         "layout": go.Layout(
-
+            title=f"Montreal-{selected.title()}",
+            # width= 400,
+            xaxis={
+                "title": "Candidates"
+            },
+            yaxis={
+                "title": "Regions"
+            },
             margin={"l": 200}
         )
 
@@ -57,3 +66,5 @@ def update_figure(selected):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+# TODO: change data for better map

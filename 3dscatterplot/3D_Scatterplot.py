@@ -2,7 +2,6 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
-# from plotly import tools
 import plotly.graph_objs as go
 
 df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv")
@@ -17,7 +16,7 @@ app.layout = html.Div([
     ], style={
         'textAlign': "center",
         "padding-bottom": "10",
-         "padding-top": "10"}),
+        "padding-top": "10"}),
     html.Div([
         dcc.Dropdown(id="continent-selected",
                      options=[{'label': i, 'value': i} for i in df.continent.unique()],
@@ -26,7 +25,7 @@ app.layout = html.Div([
                          "display": "block",
                          "margin-left": "auto",
                          "margin-right": "auto",
-                         "width": "50%"
+                         "width": "60%"
 
                      }
                      )
@@ -57,11 +56,14 @@ def ugdate_figure(selected):
         "data": trace,
         "layout": go.Layout(
             height=700,
-            #width=900,
-            )
+            title=f"For {selected}",
+
+        )
 
     }
 
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+# TODO: minimize window colorscale goes off
