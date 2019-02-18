@@ -14,6 +14,8 @@ import plotly.graph_objs as go
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+
 
 df = pd.read_csv(
     'https://gist.githubusercontent.com/chriddyp/'
@@ -23,76 +25,77 @@ df = pd.read_csv(
 
 
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
 app.layout = html.Div([
-        html.H1("US Agricultural Exports",style = {"textAlign": "center"}),
-        html.Div([
-            dcc.Dropdown(
-                id='product-selected',
-                options=[{'label': i, 'value': i} for i in df.columns.values],
-                value="poultry")
-            ],style = {
-                 'margin' : {
-                       'right': 200,
-                        'left': 200
-                         
-                         },
-                 'padding-right': 100,
-                 'padding-left': 100,
-                 'textAlign':'centre'
-                         }),
-        dcc.Graph(id = 'my-graph')
-   
-        ])
-            
+    html.H1("US Agricultural Exports", style={"textAlign": "center"}),
+    html.Div([
+        dcc.Dropdown(
+            id='product-selected',
+            options=[{'label': i.title(), 'value': i} for i in df.columns.values[2:]],
+            value="poultry")
+    ], style={
+        'margin': {
+            'right': 200,
+            'left': 200
+
+        },
+        'padding-right': 100,
+        'padding-left': 100,
+
+    }),
+    dcc.Graph(id='my-graph')
+
+])
+
+
 @app.callback(
-         dash.dependencies.Output('my-graph', 'figure'),
-         [dash.dependencies.Input('product-selected', 'value')])
-
+    dash.dependencies.Output('my-graph', 'figure'),
+    [dash.dependencies.Input('product-selected', 'value')])
 def update_graph(selected_product):
-    return{
-           'data': [
-                  go.Bar(
-                      x = df['state'],    
-                      y = df[selected_product],
-                      marker = {
-                           
-                              }                     
-                      )  
 
-                    ] ,      
-            'layout': go.Layout(
-                  xaxis = {
-                          'title': "State",
-                          'titlefont' : {
-                                  'color':'black',
-                                  'size' : 14},
-                          'tickfont' : {
-                                  'color':'black'
-                                  
-                                  }
-                          },
-                  yaxis = {
-                          'title':selected_product.title() ,
-                          'titlefont' : {
-                                  'color':'black',
-                                  'size' : 14,
-                                  
-                                  },
-                          'tickfont' : {
-                                  'color':'black'
-                                  
-                                  }
-                          }
-                          
-                          )
-          
-                
-            
+    dff = df[df[selected_product] >= 50]
+    return {
+        'data': [
+            go.Bar(
+                x=dff['state'],
+                y=dff[selected_product],
+
+                marker={
+
+                }
+            )
+
+        ],
+        'layout': go.Layout(
+            title=f'State vs {selected_product.title()}.',
+            xaxis={
+                'title': "State",
+                'titlefont': {
+                    'color': 'black',
+                    'size': 14},
+                'tickfont': {
+                    'color': 'black'
+
+                }
+            },
+            yaxis={
+                'title': selected_product.title(),
+                'titlefont': {
+                    'color': 'black',
+                    'size': 14,
+
+                },
+                'tickfont': {
+                    'color': 'black'
+
+                }
             }
 
-           
-                
+        )
+
+    }
+
+
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+
