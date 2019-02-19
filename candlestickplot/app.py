@@ -28,7 +28,7 @@ app.layout = html.Div([
                         )], style={"padding-top": 100,
                                    })
 
-], style={"margin": "30px", "padding": "10px"})
+],className="container")
 
 
 @app.callback(
