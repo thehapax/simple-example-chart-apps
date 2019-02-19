@@ -50,7 +50,7 @@ def update_figure(selected):
             lat=dff["lat"],
             lon=dff["long"],
             mode='markers',
-            marker={'size': 10, 'opacity': 0.7},
+            marker={'size': 10},
             text=dff['airport'],
             hoverinfo='text',
             name=state
