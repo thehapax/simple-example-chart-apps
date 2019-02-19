@@ -24,7 +24,7 @@ app.layout = html.Div([
         html.H1("TITANIC")
 
     ], style={
-        'textAlign': "center", 'padding': 20
+        'textAlign': "center", 'padding': 10
     }),
     html.Div([
         dcc.RadioItems(
@@ -33,7 +33,7 @@ app.layout = html.Div([
                      {'label': "Dead", 'value': 0}],
             value=0,
             labelStyle={'display': 'inline-block',
-                        'padding': 20}
+                        'padding': 10}
         )
 
     ], style={
@@ -41,7 +41,7 @@ app.layout = html.Div([
     }),
     dcc.Graph(id="my-graph"),
 
-])
+],className="container")
 
 
 @app.callback(
