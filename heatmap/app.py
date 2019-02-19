@@ -29,7 +29,7 @@ app.layout = html.Div([
 
     dcc.Graph(id="my-graph")
 
-])
+],className="container")
 
 
 @app.callback(
@@ -50,7 +50,6 @@ def update_figure(selected):
         "data": [trace],
         "layout": go.Layout(
             title=f"Montreal-{selected.title()}",
-            # width= 400,
             xaxis={
                 "title": "Candidates"
             },

@@ -68,7 +68,7 @@ def update_graph(selected):
         "layout": go.Layout(
             title=f"World Emission for the year: {selected}",
             yaxis={
-                
+
                 "range": [0, 8],
                 "tick0": 0,
                 "dtick": 1,
