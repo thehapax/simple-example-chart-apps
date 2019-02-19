@@ -44,3 +44,15 @@ https://dash-simple-apps.plotly.host/dash-candlestickplot/
 
 14.Box-plot:
 https://dash-simple-apps.plotly.host/dash-boxplot/
+
+15.Choropleth:
+https://dash-simple-apps.plotly.host/dash-choroplethplot/
+
+16.Line & Scatter plot:
+https://dash-simple-apps.plotly.host/dash-linescatterplot/
+
+17.Heatmap:
+https://dash-simple-apps.plotly.host/dash-heatmapplot/
+
+18.Plot from Csv:
+https://dash-simple-apps.plotly.host/dash-plotfromcsvplot/
