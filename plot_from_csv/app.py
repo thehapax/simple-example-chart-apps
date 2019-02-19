@@ -40,7 +40,7 @@ app.layout = html.Div([
     }),
     dcc.Graph(id="my-graph"),
 
-])
+],className="container")
 
 
 @app.callback(
@@ -68,7 +68,7 @@ def update_graph(selected):
         "layout": go.Layout(
             title=f"World Emission for the year: {selected}",
             yaxis={
-                "title": "Emission value",
+                
                 "range": [0, 8],
                 "tick0": 0,
                 "dtick": 1,
