@@ -44,13 +44,13 @@ app.layout = html.Div([
             'left': 200
 
         },
-        'padding-right': 100,
-        'padding-left': 100,
+        'padding-right': 10,
+        'padding-left': 10,
 
     }),
     dcc.Graph(id='my-graph')
 
-])
+],className="container")
 
 
 @app.callback(
