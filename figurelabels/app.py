@@ -38,7 +38,7 @@ app.layout = html.Div([
     ),
     dcc.Graph(id="my-graph")
 
-])
+],className="container")
 
 
 @app.callback(
