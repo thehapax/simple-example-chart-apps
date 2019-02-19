@@ -19,7 +19,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/hello
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.H1('Stock Tickers', style={'textAlign': 'center'}),
+    html.H1('Stock Ticker', style={'textAlign': 'center'}),
     dcc.Dropdown(
         id='my-dropdown',
         options=[
@@ -41,17 +41,19 @@ def update_graph(selected_dropdown_value):
         x=dff.Date,
         y=dff.Open,
         mode='lines',
-        opacity=0.8,
+        opacity=0.7,
+        name="Open",
         textposition='bottom center',
-        line=dict(color='#66ccff')
+        line={'color': '#ff0000'}
     )
 
     trace2 = go.Scatter(
         x=dff.Date,
         y=dff.Close,
         mode='lines',
-        opacity=0.8,
-        textposition='bottom center', line=dict(color='#ffcc66')
+        opacity=0.7,
+        name="Close",
+        textposition='bottom center', line={'color': '#9933ff'}
     )
 
     data = [trace1, trace2]
@@ -59,26 +61,12 @@ def update_graph(selected_dropdown_value):
     return {
         'data': data,
         'layout': go.Layout(
-            title='Stock Values',
-            xaxis=dict(
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=1,
-                             label='1m',
-                             step='month',
-                             stepmode='backward'),
-                        dict(count=6,
-                             label='6m',
-                             step='month',
-                             stepmode='backward'),
-                        dict(step='all')
-                    ])
-                ),
-                rangeslider=dict(
-                    visible=True
-                ),
-                type='date'
-            )
+            title=f'Stock Values for {selected_dropdown_value}',
+            xaxis={'rangeselector': {'buttons': list([
+                {'count': 1, 'label': '1m', 'step': 'month', 'stepmode': 'backward'},
+                {'count': 6, 'label': '6m', 'step': 'month', 'stepmode': 'backward'},
+                {'step': 'all'}
+            ])}, 'rangeslider': {'visible': True}, 'type': 'date'}
         )
 
     }
