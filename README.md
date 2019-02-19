@@ -7,10 +7,10 @@ https://dash-simple-apps.plotly.host/dash-barplot/
 # Link for Scatter-Map-box:
 https://dash-simple-apps.plotly.host/dash-scattermapboxplot/
 
-#Link for Shapes-plot:
+# Link for Shapes-plot:
 https://dash-simple-apps.plotly.host/dash-shapesplot/
 
-#Link for Timeseries-plot:
+# Link for Timeseries-plot:
 https://dash-simple-apps.plotly.host/dash-timeseriesplot/
 
 
