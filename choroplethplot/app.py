@@ -34,7 +34,7 @@ app.layout = html.Div([
         "padding-bottom": "30"}),
     dcc.Graph(id="my-graph")
 
-])
+],className="container")
 
 
 @app.callback(
@@ -63,6 +63,7 @@ def update_figure(selected):
                             'projection': {'type': 'Mercator'}})
 
     }
+
 
 server = app.server
 
