@@ -40,7 +40,7 @@ app.layout = html.Div([
 
     ], style={"margin": 20, "padding": 30})
 
-])
+],className="container")
 
 
 @app.callback(
