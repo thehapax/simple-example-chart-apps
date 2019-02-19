@@ -39,7 +39,7 @@ app.layout = html.Div([
     ),
     dcc.Graph(id="my-graph")
 
-])
+], className="container")
 
 
 @app.callback(
@@ -57,10 +57,7 @@ def update_figure(selected):
                 'color': df[selected].values.tolist(),
                 'colorscale': 'Hot'},
 
-        line=dict(
-            # color=('rgb(22, 96, 167)'),
-            width=4,
-        )
+        line={'width': 4}
 
     )
     )
@@ -76,7 +73,8 @@ def update_figure(selected):
             },
             yaxis={
                 "title": "Value",
-                "range": [0, 350]
+                "range": [0, 350],
+                "showline": True
             }
         )
 
