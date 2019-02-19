@@ -13,5 +13,21 @@ https://dash-simple-apps.plotly.host/dash-shapesplot/
 # Link for Timeseries-plot:
 https://dash-simple-apps.plotly.host/dash-timeseriesplot/
 
+# Link for Pie-plot:
+https://dash-simple-apps.plotly.host/dash-pieplot/
+
+# Link for Multiple-Subplot:
+https://dash-simple-apps.plotly.host/dash-multiplesubplot/
+
+# Link for Histogram:
+https://dash-simple-apps.plotly.host/dash-histogramplot/
+
+# Link for Colorscale-plot:
+https://dash-simple-apps.plotly.host/dash-colorscaleplot/
+
+# Link for Multiple-axes:
+https://dash-simple-apps.plotly.host/dash-multipleaxesplot/ 
+
+
 
 
