@@ -46,7 +46,7 @@ app.layout = html.Div([
     }),
     dcc.Graph(id="my-graph"),
 
-], style={"margin": "30px", "padding": "20px"})
+], className="container", style={"margin": "30px", "padding": "20px"})
 
 
 @app.callback(
@@ -78,10 +78,5 @@ def update_graph(selected):
 
 server = app.server
 
-
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-
-
-
