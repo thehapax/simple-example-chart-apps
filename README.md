@@ -33,6 +33,14 @@ https://dash-simple-apps.plotly.host/dash-multipleaxesplot/
 10.Figure-Labels:
 https://dash-simple-apps.plotly.host/dash-figurelabelsplot/ 
 
+11.Text-Annotations:
+https://dash-simple-apps.plotly.host/dash-text-annotationsplot/
 
+12.3D-Surface-plot:
+https://dash-simple-apps.plotly.host/dash-3dsurfaceplot/
 
+13.Candlestick-Plot:
+https://dash-simple-apps.plotly.host/dash-candlestickplot/
 
+14.Box-plot:
+https://dash-simple-apps.plotly.host/dash-boxplot/
