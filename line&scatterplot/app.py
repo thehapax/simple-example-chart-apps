@@ -33,7 +33,7 @@ app.layout = html.Div([
     html.Div([
         dcc.Slider(
             id='year-slider',
-            min=df['year'].min(),
+            min=2000,
             max=df['year'].max(),
             value=2000,
         )
