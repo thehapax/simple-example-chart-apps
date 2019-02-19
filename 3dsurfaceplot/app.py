@@ -32,7 +32,7 @@ app.layout = html.Div([
     }),
     dcc.Graph(id="my-graph"),
 
-], style={"margin": "20px"})
+],className="container")
 
 
 @app.callback(
@@ -53,7 +53,7 @@ def update_figure(selected):
             title=f'Employment rate for the state:FIPS Code({selected})',
             autosize=False,
             height=650,
-            margin={'l': 50, 'r': 50, 'b': 50, 't': 50}
+            #margin={'l': 50, 'r': 50, 'b': 50, 't': 50}
 
         )
 
