@@ -10,7 +10,6 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
-# from plotly import tools
 import plotly.graph_objs as go
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -24,7 +23,7 @@ app.layout = html.Div([
         html.H1("Antibiotic Effectiveness"),
         dcc.RadioItems(
             id='bacteria-type',
-            options=[{'label': i, 'value': i} for i in df[' Gram'].unique()],
+            options=[{'label': f'Gram {i}', 'value': i} for i in df[' Gram'].unique()],
             value='positive',
             labelStyle={'display': 'inline-block',
                         'padding': 20}
@@ -48,19 +47,19 @@ def update_graph(selected):
 
     trace1 = go.Bar(
         x=dff["Bacteria"],
-        y=dff[" Penicillin"],
+        y=1 / dff[" Penicillin"],
         name="Penicillin",
     )
     trace2 = go.Bar(
         x=dff["Bacteria"],
-        y=dff[" Streptomycin"],
+        y=1 / dff[" Streptomycin"],
         xaxis='x2',
         name="Streptomycin"
 
     )
     trace3 = go.Bar(
         x=dff["Bacteria"],
-        y=dff[" Neomycin"],
+        y=1 / dff[" Neomycin"],
         xaxis='x3',
         name="Neomycin"
     )
