@@ -7,50 +7,45 @@ from dash.dependencies import Input, Output
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/medicare.csv')
-df = df1[['City, State', 'Classification', 'Average Covered Charges ', 'Reimbursement Rate',
-          'Total Discharges ', 'Total Payment']]
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Emissions%20Data.csv')
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("MEDICARE")
-
-    ], style={'textAlign': "center"}),
-
-    html.Div(
+        html.H1("World Emission")
+    ], style={"textAlign": "center"}),
+    html.Div([
         dcc.Dropdown(
-            id="selected-type",
+            id="selected-continent",
             options=[{
                 "label": i, "value": i
-            } for i in df.Classification.unique()],
-            value='Alcohol and Drug Use',
+            } for i in df.Year.unique()],
+            value=2009,
 
-        ), style={
-            "display": "block",
-            "margin-left": "auto",
-            "margin-right": "auto",
-            "width": "60%"
+        )], style={
+        "display": "block",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "width": "60%"
 
-        }
-
+    }
     ),
     dcc.Graph(id="my-graph")
 
-], style={'margin': "20px"})
+], className="container")
 
 
 @app.callback(
     Output('my-graph', 'figure'),
-    [Input('selected-type', 'value')])
+    [Input('selected-continent', 'value')])
 def update_figure(selected):
-    dff = df[df['Classification'] == selected]
+    dff = df[df["Year"] == selected]
     traces = []
-    for category in dff.columns.values[2:]:
+    for continent in dff.Continent.unique():
         traces.append(go.Box(
-            x=dff[category],
-            name=category,
+            y=dff[dff["Continent"] == continent]["Emission"],
+            name=continent,
             marker={"size": 4}
 
         ))
@@ -59,13 +54,12 @@ def update_figure(selected):
 
         "data": traces,
         "layout": go.Layout(
-            title=f"Charges:{selected}",
+            title=f"Emission for {selected}",
             autosize=True,
             margin={"l": 200, "b": 100, "r": 200},
-            xaxis={
-                "title": selected,
+            yaxis={
+                "title": f"Emission value for {selected}",
                 "type": "log",
-
             },
 
         )
