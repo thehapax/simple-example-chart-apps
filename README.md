@@ -56,3 +56,6 @@ https://dash-simple-apps.plotly.host/dash-heatmapplot/
 
 18.Plot from Csv:
 https://dash-simple-apps.plotly.host/dash-plotfromcsvplot/
+
+19.Graphsize plot:
+https://dash-simple-apps.plotly.host/dash-graphsizeplot/
