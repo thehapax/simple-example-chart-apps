@@ -3,59 +3,59 @@ Some very simple apps to demonstrate the chart types on the Plotly website. Crea
 
 # Link for Apps:
 
-1.Bar-plot:
+1. Bar-plot:
 https://dash-simple-apps.plotly.host/dash-barplot/
 
-2.Scatter-Map-box:
+2. Scatter-Map-box:
 https://dash-simple-apps.plotly.host/dash-scattermapboxplot/
 
-3.Shapes-plot:
+3. Shapes-plot:
 https://dash-simple-apps.plotly.host/dash-shapesplot/
 
-4.Timeseries-plot:
+4. Timeseries-plot:
 https://dash-simple-apps.plotly.host/dash-timeseriesplot/
 
-5.Pie-plot:
+5. Pie-plot:
 https://dash-simple-apps.plotly.host/dash-pieplot/
 
-6.Multiple-Subplot:
+6. Multiple-Subplot:
 https://dash-simple-apps.plotly.host/dash-multiplesubplot/
 
-7.Histogram:
+7. Histogram:
 https://dash-simple-apps.plotly.host/dash-histogramplot/
 
-8.Colorscale-plot:
+8. Colorscale-plot:
 https://dash-simple-apps.plotly.host/dash-colorscaleplot/
 
-9.Multiple-axes:
+9. Multiple-axes:
 https://dash-simple-apps.plotly.host/dash-multipleaxesplot/
 
-10.Figure-Labels:
+10. Figure-Labels:
 https://dash-simple-apps.plotly.host/dash-figurelabelsplot/ 
 
-11.Text-Annotations:
+11. Text-Annotations:
 https://dash-simple-apps.plotly.host/dash-text-annotationsplot/
 
-12.3D-Surface-plot:
+12. 3D-Surface-plot:
 https://dash-simple-apps.plotly.host/dash-3dsurfaceplot/
 
-13.Candlestick-Plot:
+13. Candlestick-Plot:
 https://dash-simple-apps.plotly.host/dash-candlestickplot/
 
-14.Box-plot:
+14. Box-plot:
 https://dash-simple-apps.plotly.host/dash-boxplot/
 
-15.Choropleth:
+15. Choropleth:
 https://dash-simple-apps.plotly.host/dash-choroplethplot/
 
-16.Line & Scatter plot:
+16. Line & Scatter plot:
 https://dash-simple-apps.plotly.host/dash-linescatterplot/
 
-17.Heatmap:
+17. Heatmap:
 https://dash-simple-apps.plotly.host/dash-heatmapplot/
 
-18.Plot from Csv:
+18. Plot from Csv:
 https://dash-simple-apps.plotly.host/dash-plotfromcsvplot/
 
-19.Graphsize plot:
+19. Graphsize plot:
 https://dash-simple-apps.plotly.host/dash-graphsizeplot/
