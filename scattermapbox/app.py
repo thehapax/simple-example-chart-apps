@@ -15,7 +15,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Major Airports In The States")
+        html.H1("Airport locations in The United States")
     ], style={
         'textAlign': "center",
         "padding-bottom": "10",
@@ -60,7 +60,6 @@ def update_figure(selected):
     return {
         "data": trace,
         "layout": go.Layout(
-            title=f'Airport locations',
             autosize=True,
             hovermode='closest',
             showlegend=False,
@@ -80,4 +79,4 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO: check with sham: markers, input vs dropdown,
+

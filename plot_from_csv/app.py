@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb  1 14:24:07 2019
-
-@author: divyachandran
-"""
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -14,49 +6,73 @@ import plotly.graph_objs as go
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Emissions%20Data.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Mining-BTC-180.csv')
+df["month"] = pd.DatetimeIndex(df["Date"]).month
+
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Emission"),
+        html.H1("Bitcoin statistics over time"),
+        html.A("CSV-Dataset", href="https://raw.githubusercontent.com/plotly/datasets/master/Mining-BTC-180.csv",
+               target="_blank")
+    ], style={
+        'textAlign': "center"}),
+    html.Div([
         dcc.Dropdown(
-            id='year-selected',
-            options=[{'label': i, 'value': i} for i in df["Year"].unique()],
-            value=[2008],
+            id='value-selected',
+            options=[{'label': i, 'value': i} for i in df.columns.values[2:9]],
+            value=["Number-transactions"],
             multi=True,
             style={
                 "display": "block",
                 "margin-left": "auto",
                 "margin-right": "auto",
-                "width": "50%"
+                "width": "80%"
 
             }
 
         )
-
-    ], style={
-        'textAlign': "center"
-    }),
+    ]),
     dcc.Graph(id="my-graph"),
+    html.Div([
+        dcc.RangeSlider(
+            id='month-selected',
+            min=4,
+            max=10,
+            step=1,
+            marks={
+                4: "April",
+                5: "May",
+                6: "June",
+                7: "July",
+                8: "August",
+                9: "September",
+                10: "October"
 
-],className="container")
+            },
+            value=[5, 7]
+        )
+    ])
+
+], className="container")
 
 
 @app.callback(
     dash.dependencies.Output("my-graph", "figure"),
-    [dash.dependencies.Input("year-selected", "value")]
+    [dash.dependencies.Input("month-selected", "value"),
+     dash.dependencies.Input("value-selected", "value")]
 )
-def update_graph(selected):
+def update_graph(selected1, selected2):
+    dff = df[(df["month"] >= selected1[0]) & (df["month"] <= selected1[1])]
+
     trace = []
-    for year in selected:
-        dff = df[df["Year"] == year]
-        df1 = dff.groupby(["Continent"]).mean().reset_index()
+    for indicator in selected2:
         trace.append(go.Scatter(
-            x=df1["Continent"],
-            y=df1["Emission"],
-            name=year,
-            mode="lines+markers",
+            x=dff.Date,
+            y=dff[indicator],
+            name=indicator,
+            mode="lines",
             marker={
                 'size': 10,
                 'line': {'width': 0.5, 'color': 'white'}
@@ -66,17 +82,14 @@ def update_graph(selected):
     return {
         "data": trace,
         "layout": go.Layout(
-            title=f"World Emission for the year: {selected}",
-            yaxis={
-
-                "range": [0, 8],
-                "tick0": 0,
-                "dtick": 1,
-                "showgrid": False,
-                "showticklabels": False,
+            title=f"{','.join(str(i) for i in selected2)} vs Date",
+            xaxis={
+                "title": "Date"
             },
-            xaxis={'showgrid': False,
-                   "title": "Continents"}
+            yaxis={
+                "title": f"{','.join(str(i) for i in selected2)}"
+            }
+
         )
 
     }
@@ -86,3 +99,5 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+# TODO: adjust the title list

@@ -11,88 +11,117 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
+from dash.dependencies import Input, Output, State
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Emissions%20Data.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/styled-line.csv')
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Emissions"),
-        dcc.Dropdown(
-            id='year-selected',
-            options=[{'label': i, 'value': i} for i in df["Year"].unique()],
-            value=[2008],
-            multi=True,
-            style={
-                "display": "block",
-                "margin-left": "auto",
-                "margin-right": "auto",
-                "width" : "50%"
+        html.H1("Temperatures in New York")
+    ], style={'textAlign': "center"}),
+    html.Div([
+        html.Div([
+            dcc.RadioItems(
+                id="select-text",
+                options=[
+                    {'label': 'Add annotations', 'value': 1},
+                    {'label': 'Remove annotations', 'value': 0}
+                ],
+                value=1,
+                labelStyle={'display': 'inline-block', "padding": 5})
+        ], className="six columns"),
 
-            }
+        html.Div([dcc.Dropdown(
+            id='value-selected',
+            options=[{"label": i, 'value': i} for i in df.columns[1:]],
+            value=['High 2007', 'Low 2000'],
+            multi=True
 
         )
+        ], className="six columns")
 
-    ], style={
-        'textAlign': "center"
-    }),
+    ], className="row"),
+
     dcc.Graph(id="my-graph"),
 
-],className="container")
+    html.Div([
+        dcc.Input(id='x-input', type='text', placeholder="Input month", value=''),
+        dcc.Input(id='y-input', type='number', placeholder="Input temperature", value=''),
+        dcc.Input(id='text-input', type='text', placeholder="Input text", value=''),
+        html.Button(id='submit-button', children="Type text/position & Submit"),
+
+    ], style={"display": "block",
+              "margin-left": "auto",
+              "margin-right": "auto",
+              "width": "60%",
+              "padding": 20
+              }),
+], className="container")
 
 
 @app.callback(
-    dash.dependencies.Output("my-graph", "figure"),
-    [dash.dependencies.Input("year-selected", "value")]
+    Output("my-graph", "figure"),
+    [Input("value-selected", "value"),
+     Input("select-text", "value"),
+     Input('submit-button', 'n_clicks')],
+    [State('x-input', 'value'),
+     State('y-input', 'value'),
+     State('text-input', 'value')]
+
 )
-def update_graph(selected):
+def update_graph(selected, add_text, n_clicks, x_value, y_value, text):
     trace = []
-    for year in selected:
-        dff = df[df["Year"] == year]
-        df1 = dff.groupby(["Continent"]).mean().reset_index()
+    for value in selected:
         trace.append(go.Scatter(
-            x=df1["Continent"],
-            y=df1["Emission"],
-            name=year,
+            x=df["Months"],
+            y=df[value],
             mode="lines+markers",
             marker={
-                "opacity":0.7,
+                "opacity": 0.7,
                 'size': 10,
                 'line': {'width': 0.5, 'color': 'white'}
             },
+            name=value
         ))
+    layout = go.Layout(
+        colorway=["#EF533B", "#EF963B", "#287D95", "#2CB154", "#8C299D", "#8DD936"],
+        title="Temperature over the months",
+        yaxis={
+            "title": f"Temperature (degrees F)",
+        },
+        xaxis={
+            "title": "Months"}
+    )
 
-    return {
+    figure = {
         "data": trace,
-        "layout": go.Layout(
-            title= "World Emission with max value",
-            annotations=[
-                {'x': 1, 'y': 7.5, 'xref': 'x', 'yref': 'y', 'text': 'Max=Asia', 'showarrow': True, 'font': dict(
-                    family='Courier New, monospace',
-                    size=16,
-                    color='#ffffff'
-                ), 'align': 'center', 'arrowhead': 2, 'arrowsize': 1, 'arrowwidth': 2, 'arrowcolor': '#636363',
-                 'ax': 20, 'ay': -30, 'bordercolor': '#ff6666', 'borderwidth': 2, 'borderpad': 4, 'bgcolor': '#ff6666',
-                 'opacity': 0.8}
-            ],
-            yaxis={
-                "title": f"Value for : {selected}",
-                "range": [0,8],
-                "tick0": 0,
-                "dtick": 1,
-                "showgrid": False,
-                "showticklabels": False,
-                "showline": True
-            },
-            xaxis={'showgrid': False,
-                   "title": "World Continents"}
-        )
+        "layout": layout}
 
-    }
+    if add_text == 1:
+        layout.update({
+            "annotations": [
+                {'x': x_value.title(),
+                 'y': y_value,
+                 'xref': 'x',
+                 'yref': 'y',
+                 'text': text,
+                 'showarrow': False,
+                 'align': 'center',
+                 }
+            ],
+        })
+        return figure
+
+    else:
+        return figure
+
 
 server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+# TODO: check n_clicks

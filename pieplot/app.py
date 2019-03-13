@@ -44,11 +44,11 @@ def update_graph(selected):
         "data": [go.Pie(
             labels=df["Country"].unique().tolist(),
             values=df[df["Month"] == selected]["Value"].tolist(),
-            marker={'colors': ['rgb(33, 75, 99)',
-                               'rgb(79, 129, 102)',
-                               'rgb(151, 179, 100)',
-                               'rgb(175, 49, 35)',
-                               'rgb(36, 73, 147)']},
+            marker={'colors': ['#A760F3',
+                               '#F454DB',
+                               '#DAFD57',
+                               '#FFF457',
+                               '#57D4F1']},
             textinfo='label'
 
         )

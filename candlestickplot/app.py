@@ -48,14 +48,14 @@ def update_figure(selected):
     return {
         'data': [trace],
         'layout': go.Layout(
-            title=f'Stock Values for the period:{selected}',
+            title=f"Stock Values for the period:{'-'.join(str(i)for i in selected)}",
             xaxis={
 
                 'rangeslider': {'visible': False},
                 'autorange': "reversed",
             },
             yaxis={
-                "title": f'Values'
+                "title": f'Stock Price'
             }
 
         )}

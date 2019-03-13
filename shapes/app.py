@@ -12,26 +12,22 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Gapminder data with Shape attribute")
+        html.H1("Demographic data over continents")
     ], style={
         'textAlign': "center",
         "padding-bottom": "30"}),
     html.Div([
-        dcc.Input(id="continent-selected",
-                  placeholder='Enter name of continent in Title-Case : eg Asia',
-                  type="text",
-                  value="Europe",
+        dcc.Dropdown(id="continent-selected",
+                     options=[{'label': i, 'value': i} for i in df['continent'].unique()],
+                     value="Asia",
+                     style={
+                         "display": "block",
+                         "margin-left": "auto",
+                         "margin-right": "auto",
+                         "width": "50%"
 
-                  style={
-                      "display": "block",
-                      "margin-left": "auto",
-                      "margin-right": "auto",
-                      "width": "50%"
-                  }
-                  )
-    ], style={
-        'textAlign': "center",
-        "padding-bottom": "30"}),
+                     }
+                     )]),
     dcc.Graph(id="my-graph")
 
 ], className="container")
@@ -42,34 +38,36 @@ app.layout = html.Div([
     [dash.dependencies.Input("continent-selected", "value")]
 )
 def update_figure(selected):
-    dff = df[df['continent'] == selected.title()]
+    dff = df[df['continent'] == selected]
 
     trace = go.Scatter(
         x=dff["gdpPercap"],
         y=dff["lifeExp"],
         text=dff["country"],
         mode="markers",
+        name= selected,
         marker={
             'size': 10,
-            'line': {'width': 0.5, 'color': 'blue'},
-            "color": "blue",
+            'line': {'width': 0.5, 'color': '#19D1F3'},
+            "color": "#19D1F3",
             'opacity': 0.7,
         },
-        name=selected
+
     )
 
     return {
         "data": [trace],
         "layout": go.Layout(
+            title="Life Expectancy vs Gdp Per capita",
             xaxis={
-                "title": 'Gdp Per cap',
+                "title": 'Gdp Per capita (USD)',
                 "range": [0, 40000],
                 "tick0": 0,
                 "dtick": 5000,
                 "showline": True
             },
             yaxis={
-                "title": "Life Expectancy",
+                "title": "Life Expectancy (Years)",
                 "range": [20, 100],
                 "tick0": 20,
                 "dtick": 10,
@@ -85,9 +83,9 @@ def update_figure(selected):
                     'x1': dff["gdpPercap"].quantile(q=0.90),
                     'y1': dff["lifeExp"].quantile(q=0.90),
                     'opacity': 0.5,
-                    'fillcolor': '#8080ff',
+                    'fillcolor': '#0196B2',
                     'line': {
-                        'color': '#8080ff',
+                        'color': '#0196B2',
                     },
                 }
 
@@ -102,3 +100,5 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+# TODO: input versus a dropdown.

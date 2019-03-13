@@ -25,7 +25,7 @@ df = pd.read_csv(
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.H1("US Agricultural Exports", style={"textAlign": "center"}),
+    html.H1("US Export", style={"textAlign": "center"}),
     html.Div([
         html.Div([
             dcc.Dropdown(
@@ -83,6 +83,7 @@ def update_graph(selected_product1,selected_product2):
         'data': [trace1,trace2],
         'layout': go.Layout(
             title=f'State vs Export Value:{selected_product1.title()},{selected_product2.title()}',
+            colorway=["#FF9C00","#00CC94"],
             xaxis={
                 'title': "State",
                 'titlefont': {
@@ -94,7 +95,7 @@ def update_graph(selected_product1,selected_product2):
                 }
             },
             yaxis={
-                'title': "Export Value",
+                'title': "Export price (USD)",
                 'titlefont': {
                     'color': 'black',
                     'size': 14,
