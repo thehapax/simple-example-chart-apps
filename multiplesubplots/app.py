@@ -22,67 +22,51 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             html.Div([
-                html.Span("Scatterplot X-axis"),
-                dcc.Dropdown(id="xaxis",
+                html.Span("Scatterplot X-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right" }),
+                html.Div(dcc.Dropdown(id="xaxis",
                              options=[{'label': "Miles per gallon", 'value': "mpg"},
                                       {'label': "Displacement (cu.in.)", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
                                       {'label': "1/4 mile time", 'value': "qsec"}],
                              value='disp',
-                             style={
-                                 "disply": "block",
-                                 "width": "80%",
-                                 "margin-left": "auto",
-                                 "margin-right": "auto"
-                             }
-                             )]),
+
+                                      ),className="three columns",style={"width": 250,"margin":0})],className="row"),
             html.Div([
-                html.Span("Scatterplot Y-axis"),
-                dcc.Dropdown(id="yaxis",
+                html.Span("Scatterplot Y-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right"}),
+                html.Div(dcc.Dropdown(id="yaxis",
                              options=[{'label': "Miles per gallon", 'value': "mpg"},
                                       {'label': "Displacement (cu.in.)", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
                                       {'label': "1/4 mile time", 'value': "qsec"}],
                              value='mpg',
-                             style={
-                                 "disply": "block",
-                                 "width": "80%",
-                                 "margin-left": "auto",
-                                 "margin-right": "auto"
-                             }
-                             )]),
-        ], style={'width': '48%', 'display': 'inline-block'}, className="columns"),
+
+                                      ),className="three columns",style={"width": 250,"margin":0})],className="row"),
+        ], style={'width': '48%', 'display': 'inline-block'}, className="six columns"),
         html.Div([
             html.Div([
-                html.Span("Box Plot x-axis"),
-                dcc.RadioItems(id="select-value",
+                html.Span("Box Plot x-axis",className="three columns",style={"text-align":"right","width":150,"padding":10}),
+                html.Div(dcc.RadioItems(id="select-value",
                                options=[{'label': "Transmission", 'value': "am"},
                                         {'label': "Engine-Type", 'value': "vs"}],
                                value='vs',
-                               labelStyle={'display': 'inline-block', "padding": 10},
+                               labelStyle={'display': 'inline'},
 
-                               )], className="row"),
+                               ),className="three columns",style={"width":250,"margin":0,"padding": 10})], className="row"),
             html.Div([
-                html.Span("Box Plot y-axis"),
-                dcc.Dropdown(id="boxplot-yaxis",
+                html.Span("Box Plot y-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right" }),
+                html.Div(dcc.Dropdown(id="boxplot-yaxis",
                              options=[{'label': "Miles per gallon", 'value': "mpg"},
                                       {'label': "Displacement (cu.in.)", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
                                       {'label': "1/4 mile time", 'value': "qsec"}],
                              value='mpg',
-                             style={
-                                 "disply": "block",
-                                 "width": "80%",
-                                 "margin-left": "auto",
-                                 "margin-right": "auto"
-                             }
-                             )
+              ) ,className="three columns",style={"width": 250,"margin":0})
             ], className="row")
         ], style={'width': '48%', 'float': 'right', 'display': 'inline-block', "margin-left": "auto",
-                  "margin-right": "auto"}, className="columns")
+                  "margin-right": "auto"}, className="six columns")
     ], className="row"),
     html.Div([
         dcc.Graph(id="my-graph")]),
