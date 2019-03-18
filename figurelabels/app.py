@@ -13,7 +13,7 @@ df = df1.iloc[0:50]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-font = ["Arial", "Open Sans","Balto", "Courier New", "PT Sans Narrow", "Times New Roman", "Comic Sans MS",
+font = ["Arial", "Open Sans", "Balto", "Courier New", "PT Sans Narrow", "Times New Roman", "Comic Sans MS",
         "cursive"]
 
 app.layout = html.Div([
@@ -49,45 +49,39 @@ app.layout = html.Div([
                                    }
                                    )], style={"padding": 10}),
             html.Div([
-                            dcc.Input(id='size-input', type='number', value=15),
-                            html.Button(id='submit-button', children="Submit font size"),
+                dcc.Input(id='size-input', type='number', value=15),
+                html.Button(id='submit-button', children="Submit font size"),
 
-                        ], style={"display": "block",
-                                  "margin-left": "auto",
-                                  "margin-right": "auto",
-                                  "width": "40%",
-                                  "padding": "10"
-                                  }),
+            ], style={"display": "block",
+                      "margin-left": "auto",
+                      "margin-right": "auto",
+                      "width": "40%",
+                      "padding": "10"
+                      }),
 
         ], className="six columns"),
         html.Div([
             html.Div([
                 html.Div([
-                    html.Span("Category"),
-                    dcc.Dropdown(
+                    html.Span("Category", className="three columns",
+                              style={"width": 100, "text-align": "right", "padding": 10}),
+                    html.Div(dcc.Dropdown(
                         id="selected-type",
                         options=[
                             {'label': "Past-due(30-59days)", 'value': 'NumberOfTime30-59DaysPastDueNotWorse'},
                             {'label': "Debt-ratio", 'value': 'DebtRatio'},
                             {'label': "Income", 'value': 'MonthlyIncome'},
                             {'label': "Open Credits/loans", 'value': 'NumberOfOpenCreditLinesAndLoans'},
-                            {'label':"Past-due(90 days)",'value':'NumberOfTimes90DaysLate'},
-                            {'label':"Real estate loans",'value':'NumberRealEstateLoansOrLines'},
-                            {'label':"Past-due(60-89 days)",'value':'NumberOfTime60-89DaysPastDueNotWorse'},
-                            { 'label':"Dependents",'value':'NumberOfDependents'}
+                            {'label': "Past-due(90 days)", 'value': 'NumberOfTimes90DaysLate'},
+                            {'label': "Real estate loans", 'value': 'NumberRealEstateLoansOrLines'},
+                            {'label': "Past-due(60-89 days)", 'value': 'NumberOfTime60-89DaysPastDueNotWorse'},
+                            {'label': "Dependents", 'value': 'NumberOfDependents'}
                         ],
                         value='MonthlyIncome',
-                    )], style={
-                        "display": "block",
-                        "margin-left": "auto",
-                        "margin-right": "auto",
-                        "width": "70%"
+                    ), className="three columns", style={"width": 300, "margin": 0, "padding": 10})], className="row",
+                    style={"margin": 10, "padding": 10}),
 
-                    }
-
-                ),
-
-                dcc.Graph(id="my-graph")], className="six columns"),
+                dcc.Graph(id="my-graph", className="row")], className="six columns"),
         ])
     ])
 
@@ -102,17 +96,16 @@ app.layout = html.Div([
      Input('submit-button', 'n_clicks')],
     [State('size-input', 'value')])
 def update_figure(selected_type, selected_color, selected_font, n_clicks, size):
-
     color = selected_color["hex"]
     dropdown = {
-         'NumberOfTime30-59DaysPastDueNotWorse':"Past-due(30-59days)",
-        'DebtRatio':"Debt-ratio",
+        'NumberOfTime30-59DaysPastDueNotWorse': "Past-due(30-59days)",
+        'DebtRatio': "Debt-ratio",
         'MonthlyIncome': "Income",
-        'NumberOfOpenCreditLinesAndLoans':"Open Credits/loans",
-        'NumberOfTimes90DaysLate':"Past-due(90 days)",
+        'NumberOfOpenCreditLinesAndLoans': "Open Credits/loans",
+        'NumberOfTimes90DaysLate': "Past-due(90 days)",
         'NumberRealEstateLoansOrLines': "Real estate loans",
-        'NumberOfTime60-89DaysPastDueNotWorse':"Past-due(60-89 days)",
-        'NumberOfDependents':"Dependents"}
+        'NumberOfTime60-89DaysPastDueNotWorse': "Past-due(60-89 days)",
+        'NumberOfDependents': "Dependents"}
 
     trace = go.Scatter(
         x=df["age"],
@@ -125,7 +118,7 @@ def update_figure(selected_type, selected_color, selected_font, n_clicks, size):
                 }, )
 
     return {
-        "data":[trace],
+        "data": [trace],
 
         "layout": go.Layout(
             title={"text": f'{dropdown[selected_type]} Vs Age',
@@ -151,4 +144,3 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
