@@ -22,9 +22,9 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             html.Div([
-                html.H6("Scatterplot X-axis"),
+                html.Span("Scatterplot X-axis"),
                 dcc.Dropdown(id="xaxis",
-                             options=[{'label': "Miles/(US) gallon", 'value': "mpg"},
+                             options=[{'label': "Miles per gallon", 'value': "mpg"},
                                       {'label': "Displacement (cu.in.)", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
@@ -38,9 +38,9 @@ app.layout = html.Div([
                              }
                              )]),
             html.Div([
-                html.H6("Scatterplot Y-axis"),
+                html.Span("Scatterplot Y-axis"),
                 dcc.Dropdown(id="yaxis",
-                             options=[{'label': "Miles/(US) gallon", 'value': "mpg"},
+                             options=[{'label': "Miles per gallon", 'value': "mpg"},
                                       {'label': "Displacement (cu.in.)", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
@@ -55,13 +55,32 @@ app.layout = html.Div([
                              )]),
         ], style={'width': '48%', 'display': 'inline-block'}, className="columns"),
         html.Div([
-            html.H6("Box Plot, select type"),
-            dcc.RadioItems(id="select-value",
-                           options=[{'label': "Transmission", 'value': "am"}, {'label': "Engine-Type", 'value': "vs"}],
-                           value='vs',
-                           labelStyle={'display': 'inline-block'},
+            html.Div([
+                html.Span("Box Plot x-axis"),
+                dcc.RadioItems(id="select-value",
+                               options=[{'label': "Transmission", 'value': "am"},
+                                        {'label': "Engine-Type", 'value': "vs"}],
+                               value='vs',
+                               labelStyle={'display': 'inline-block', "padding": 10},
 
-                           )
+                               )], className="row"),
+            html.Div([
+                html.Span("Box Plot y-axis"),
+                dcc.Dropdown(id="boxplot-yaxis",
+                             options=[{'label': "Miles per gallon", 'value': "mpg"},
+                                      {'label': "Displacement (cu.in.)", 'value': "disp"},
+                                      {'label': "Rear axle ratio", 'value': "drat"},
+                                      {'label': "Weight (1000 lbs)", 'value': "wt"},
+                                      {'label': "1/4 mile time", 'value': "qsec"}],
+                             value='mpg',
+                             style={
+                                 "disply": "block",
+                                 "width": "80%",
+                                 "margin-left": "auto",
+                                 "margin-right": "auto"
+                             }
+                             )
+            ], className="row")
         ], style={'width': '48%', 'float': 'right', 'display': 'inline-block', "margin-left": "auto",
                   "margin-right": "auto"}, className="columns")
     ], className="row"),
@@ -75,9 +94,10 @@ app.layout = html.Div([
     dash.dependencies.Output("my-graph", "figure"),
     [dash.dependencies.Input("xaxis", "value"),
      dash.dependencies.Input("yaxis", "value"),
+     dash.dependencies.Input("boxplot-yaxis", "value"),
      dash.dependencies.Input("select-value", "value")]
 )
-def update_graph(selected1, selected2, selected3):
+def update_graph(selected1, selected2, selected_box_y, selected_box_x):
     trace1 = [go.Scatter(
         x=df[selected1],
         y=df[selected2],
@@ -85,18 +105,18 @@ def update_graph(selected1, selected2, selected3):
         mode='markers',
         opacity=0.7,
         marker={
-            'size': 15,
+            'size': 10,
             "color": "#00CC94",
-            'line': {'width': 0.5, 'color': 'white'}
+
         },
         showlegend=False,
 
     )]
 
     trace2 = [go.Box(
-        x=df[selected3],
-        y=df['mpg'],
-        name=f'{"Transmission" if selected3 == "am" else "Engine Type"}',
+        x=df[selected_box_x],
+        y=df[selected_box_y],
+        name=f'{"Transmission" if selected_box_x == "am" else "Engine Type"}',
         xaxis='x2',
         yaxis='y2',
         marker={
@@ -110,11 +130,11 @@ def update_graph(selected1, selected2, selected3):
         xaxis='x3',
         yaxis='y3',
         showlegend=False,
-        marker={"color": "#1166CC", "opacity": 0.7}
+        marker={"color": "#5DB4F2", "opacity": 0.8}
     )]
 
     trace = trace1 + trace2 + trace3
-    text = {"mpg": "Miles/(US) gallon", "disp": "Displacement (cu.in.)", "drat": "Rear axle ratio",
+    text = {"mpg": "Miles per gallon", "disp": "Displacement (cu.in.)", "drat": "Rear axle ratio",
             "qsec": "1/4 mile time", "wt": "Weight (1000 lbs)"}
     return {
 
@@ -134,11 +154,11 @@ def update_graph(selected1, selected2, selected3):
                     }
                 },
                 {
-                    "x": 0.8,
+                    "x": 0.85,
                     "y": 1,
                     "xref": "paper",
                     "yref": "paper",
-                    "text": f'{"Transmission" if selected3 == "am" else "Engine Type"}',
+                    "text": f'{"Transmission" if selected_box_x == "am" else "Engine Type"}',
                     "showarrow": False,
                     "font": {
                         "size": 12
@@ -166,11 +186,13 @@ def update_graph(selected1, selected2, selected3):
                 "domain": [0.65, 1], "anchor": 'x'
             },
             xaxis2={
-                "title": f'{"Automatic transmission   Manual transmission " if selected3 == "am" else "V-shaped engine   Straight engine"}',
-                "domain": [0.60, 1], "anchor": 'y2'
+                "title": f'{"Automatic transmission   Manual transmission " if selected_box_x == "am" else "V-shaped engine   Straight engine"}',
+                "domain": [0.60, 1], "anchor": 'y2',
+                "showticklabels": False,
+
             },
             yaxis2={
-                "title": "MilesPerGallon(mpg)",
+                "title": text[selected_box_y],
                 "domain": [0.65, 1],
                 "anchor": 'x2'
             },
@@ -187,7 +209,9 @@ def update_graph(selected1, selected2, selected3):
     }
 
 
+server = app.server
+
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO: add titles in the layout
+# TODO: change dropdown to inline

@@ -60,7 +60,7 @@ def update_figure(selected):
         "layout": go.Layout(
             title="Life Expectancy vs Gdp Per capita",
             xaxis={
-                "title": 'Gdp Per capita (USD)',
+                "title": 'GDP Per Capita (USD)',
                 "range": [0, 40000],
                 "tick0": 0,
                 "dtick": 5000,
@@ -101,4 +101,3 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO: input versus a dropdown.

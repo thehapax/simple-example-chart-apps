@@ -13,9 +13,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Bitcoin statistics over time"),
-        html.A("CSV-Dataset", href="https://raw.githubusercontent.com/plotly/datasets/master/Mining-BTC-180.csv",
-               target="_blank")
+        html.H1("Bitcoin Statistics Over Time"),
     ], style={
         'textAlign': "center"}),
     html.Div([
@@ -30,10 +28,13 @@ app.layout = html.Div([
                 "margin-right": "auto",
                 "width": "80%"
 
-            }
+            },
 
-        )
-    ]),
+            className="eight columns"),
+        html.A("Click Here to view the dataset",
+               href="https://raw.githubusercontent.com/plotly/datasets/master/Mining-BTC-180.csv",
+               target="_blank", style={"width": "30%", "float": "right"}, className="four columns")
+    ], className="row"),
     dcc.Graph(id="my-graph"),
     html.Div([
         dcc.RangeSlider(
@@ -74,7 +75,7 @@ def update_graph(selected1, selected2):
             name=indicator,
             mode="lines",
             marker={
-                'size': 10,
+                'size': 15,
                 'line': {'width': 0.5, 'color': 'white'}
             },
         ))
@@ -82,13 +83,14 @@ def update_graph(selected1, selected2):
     return {
         "data": trace,
         "layout": go.Layout(
-            title=f"{','.join(str(i) for i in selected2)} vs Date",
+            title=f"{','.join((str(i).replace('-', ' ')) for i in selected2)} vs Date",
             xaxis={
                 "title": "Date"
             },
             yaxis={
-                "title": f"{','.join(str(i) for i in selected2)}"
-            }
+                "title": f"Statistics"
+            },
+            colorway=["#C7037A", "#E20048", "#FFCB00", "#FF7C00", "#2F9609", "#0E4770", "#A8AE0B"],
 
         )
 
@@ -99,5 +101,3 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-# TODO: adjust the title list

@@ -28,7 +28,7 @@ app.layout = html.Div([
                         )], style={"padding-top": 100,
                                    })
 
-],className="container")
+], className="container")
 
 
 @app.callback(
@@ -41,14 +41,14 @@ def update_figure(selected):
                     high=dff['high'],
                     low=dff['low'],
                     close=dff['close'],
-                    increasing={'line': {'color': '#bb2b19'}},
-                    decreasing={'line': {'color': '#640595'}}
+                    increasing={'line': {'color': '#00CC94'}},
+                    decreasing={'line': {'color': '#F50030'}}
                     )
 
     return {
         'data': [trace],
         'layout': go.Layout(
-            title=f"Stock Values for the period:{'-'.join(str(i)for i in selected)}",
+            title=f"Stock Values for the period:{'-'.join(str(i) for i in selected)}",
             xaxis={
 
                 'rangeslider': {'visible': False},

@@ -1,0 +1,30 @@
+.row a {
+    margin: 5px;
+    background-color: #F9ECEF;
+    border: 1px solid #8e2138;
+    border-radius: 5px;
+    color: #8e2138;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+
+
+
+}
+
+.Select--multi .Select-value{
+    color: #8e2138;
+    background-color:#F9ECEF;
+}
+.rc-slider-rail{
+    background-color:#F9ECEF;
+}
+
+.rc-slider-step {
+    background-color: #8e2138;
+
+}
+.rc-slider-dot-active,.rc-slider-handle {
+    border: 2px solid #8e2138;
+}

@@ -73,6 +73,16 @@ app.layout = html.Div([
 
 )
 def update_graph(selected, add_text, n_clicks, x_value, y_value, text):
+    dropdown ={
+        "High 2014" : "High Temperature in 2014",
+        "Low 2014": "Low Temperature in 2014",
+        "High 2007": "High Temperature in 2007",
+        "Low 2007": "Low Temperature in 2007",
+        "High 2000": "High Temperature in 2000",
+        "Low 2000": "Low Temperature in 2000"
+    }
+
+
     trace = []
     for value in selected:
         trace.append(go.Scatter(
@@ -81,14 +91,14 @@ def update_graph(selected, add_text, n_clicks, x_value, y_value, text):
             mode="lines+markers",
             marker={
                 "opacity": 0.7,
-                'size': 10,
+                'size': 5,
                 'line': {'width': 0.5, 'color': 'white'}
             },
-            name=value
+            name=dropdown[value]
         ))
     layout = go.Layout(
         colorway=["#EF533B", "#EF963B", "#287D95", "#2CB154", "#8C299D", "#8DD936"],
-        title="Temperature over the months",
+        title="Temperature Over the Months",
         yaxis={
             "title": f"Temperature (degrees F)",
         },
@@ -124,4 +134,4 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO: check n_clicks
+# TODO:add more annotations with same input.

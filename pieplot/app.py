@@ -21,14 +21,26 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Ebola Cases-2014")], style={"textAlign": "center"}),
+        html.H1("Ebola Cases reported in Africa - 2014")], style={"textAlign": "center"}),
     dcc.Graph(id="my-graph"),
     html.Div([dcc.Slider(
         id='month-selected',
-        min=df["Month"].min(),
-        max=df["Month"].max(),
-        marks={i: 'Month {}'.format(i) for i in range(3, 12)},
-        value=8)
+        min=3,
+        max=12,
+        value=8,
+        marks={
+            3: "March",
+            4: "April",
+            5: "May",
+            6: "June",
+            7: "July",
+            8: "August",
+            9: "September",
+            10: "October",
+            11: "November",
+            12: "December",
+        },
+    )
     ], style={
         'textAlign': "center", "margin": "30px", "padding": "10px"}),
 
@@ -44,10 +56,10 @@ def update_graph(selected):
         "data": [go.Pie(
             labels=df["Country"].unique().tolist(),
             values=df[df["Month"] == selected]["Value"].tolist(),
-            marker={'colors': ['#A760F3',
-                               '#F454DB',
-                               '#DAFD57',
-                               '#FFF457',
+            marker={'colors': ['#EF963B',
+                               '#C93277',
+                               '#349600',
+                               '#EF533B',
                                '#57D4F1']},
             textinfo='label'
 
@@ -56,6 +68,7 @@ def update_graph(selected):
         "layout": go.Layout(
             title=f'Cases reported monthly',
             margin={"l": 300, "r": 300, },
+            legend={"x": 1, "y": 0.7}
         )
 
     }

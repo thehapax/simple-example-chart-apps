@@ -60,22 +60,23 @@ def update_graph(selected_dropdown_value):
             opacity=0.7,
             name=f'Open {dropdown[stock]}',
             textposition='bottom center',
-            line={'color': '#ff0000'}
+
         ))
         trace2.append(go.Scatter(
             x=df[df["Stock"] == stock]["Date"],
             y=df[df["Stock"] == stock]["Close"],
             mode='lines',
-            opacity=0.7,
-            name= f'Close {dropdown[stock]}',
-            textposition='bottom center', line={'color': '#9933ff'}
+            opacity=0.6,
+            name=f'Close {dropdown[stock]}',
+            textposition='bottom center',
         ))
 
-    traces = [trace1,trace2]
+    traces = [trace1, trace2]
     data = [val for sublist in traces for val in sublist]
     figure = {
         'data': data,
         'layout': go.Layout(
+            colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400', '#FF0056'],
             height=600,
             title=f"{','.join(str(dropdown[i]) for i in selected_dropdown_value)} Stock Values vs Time",
             xaxis={'rangeselector': {'buttons': list([

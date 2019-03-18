@@ -15,7 +15,7 @@ available_indicators = df.columns.values[1:]
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Rainfall for New-Zealand")
+        html.H1("Rainfall for Cities in New Zealand ")
 
     ], style={'textAlign': "center"}),
 
@@ -59,7 +59,8 @@ def update_figure(selected_1, selected_2):
         yaxis="y2",
         xaxis='x',
         mode='lines',
-        opacity=0.6
+        marker={"size": 8},
+        opacity=0.7
 
     )
     return {
@@ -68,9 +69,10 @@ def update_figure(selected_1, selected_2):
         "layout": go.Layout(
             title=f"Rainfall for {selected_1} and {selected_2}",
             margin={"l": 100, "r": 100},
-            colorway=["#FFEC4C","#636EFA"],
+            colorway=["#287D95", "#EF533B"],
+            legend={"x": 0.7, "y": 1, 'orientation': "h"},
             xaxis={
-                "title": "Date"
+                "title": "Year"
             },
             yaxis={'title': f'Rainfall(mm) for {selected_1}',
 

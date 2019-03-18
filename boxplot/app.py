@@ -13,7 +13,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("World Emission")
+        html.H1("Greenhouse Gas Emissions by Continent")
     ], style={"textAlign": "center"}),
 
     dcc.Graph(id="my-graph"),
@@ -54,11 +54,11 @@ def update_figure(selected):
 
         "data": traces,
         "layout": go.Layout(
-            title=f"Emission vs Continents",
+            title=f"Emission Levels for {'-'.join(str(i)for i in selected)}",
             autosize=True,
             margin={"l": 200, "b": 100, "r": 200},
             yaxis={
-                "title": f"Emission value for {'-'.join(str(i)for i in selected)} (Gt)",
+                "title": f"Emissions (gigatonnes of CO2)",
                 "type": "log",
             },
 

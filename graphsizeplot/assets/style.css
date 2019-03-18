@@ -1,0 +1,7 @@
+.rc-slider-rail , .rc-slider-step {
+    background-color: #003E5C;
+}
+
+.rc-slider-dot-active , .rc-slider-handle {
+    border: 2px solid #003E5C
+}

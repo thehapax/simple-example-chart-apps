@@ -1,0 +1,9 @@
+.rc-slider-rail, .rc-slider-track{
+    background-color: #d2330e;
+}
+.rc-slider-handle{
+    border : solid 2px #d2330e;
+}
+.rc-slider-dot-active,.rc-slider-dot-active{
+    border-color : #d2330e;
+}

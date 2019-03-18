@@ -50,13 +50,19 @@ app.layout = html.Div([
     html.Div(
         dcc.Slider(
             id="graph-size",
-            min=0,
-            max=2,
-            value=1,
+            min=300,
+            max=900,
+            value=450,
+            step=100,
             marks={
-                0: "Small",
-                1: "Original",
-                2: "Large"
+                300: "300px",
+                400: "400px",
+                500: "500px",
+                600: "600px",
+                700: "700px",
+                800: "800px",
+                900: "900px",
+
             }
         ), style={
             "display": "block",
@@ -74,12 +80,6 @@ app.layout = html.Div([
     [Input('selected-type', 'value'),
      Input('graph-size', 'value')])
 def update_figure(selected, size_selected):
-    dropdown = {'AIDS-related deaths': "Death",
-                'Coverage of people receiving ART': "Receiving ART",
-                'Deaths averted due to ART': "Death averted by ART",
-                'New HIV Infections': "New infections",
-                'Pregnant women needing ARV for preventing MTCT': "Pregnant women needing ART",
-                'Pregnant women who received ARV for preventing MTCT': "Pregnant women received ART"}
 
     traces = []
     for select in selected:
@@ -87,7 +87,7 @@ def update_figure(selected, size_selected):
             x=df[df['Indicator'] == select]['Time Period'],
             y=df[df['Indicator'] == select]['Data Value'],
             mode='lines+markers',
-            marker={"size": 6, "color": '#FF4601'},
+            marker={"size": 6,},
             showlegend=False
         ))
     layout = go.Layout(
@@ -98,17 +98,12 @@ def update_figure(selected, size_selected):
         yaxis={
             "title": f"Number of cases",
             "tickangle": -45,
-            "tickfont": {"size": 8},
+            "tickfont": {"size": 10},
         },
+        height=size_selected,
+        width=2 * size_selected,
         autosize=True,
-        margin=go.layout.Margin(
-            l=100,
-            r=100,
-            b=100,
-            t=100,
-            pad=4
-        ),
-
+        colorway=["#003f5c","#955196","#dd5182","#ff6e54","#ffa600","#061460"]
     )
 
     figure = {
@@ -116,33 +111,10 @@ def update_figure(selected, size_selected):
         "layout": layout
     }
 
-    if size_selected == 1:
-        layout.update(
-            {"height": 450,
-             "width": 900,
-             "margin": {"l": 180, "r": 90, "b": 100, "t": 100, "pad": 40},
-             },
-        )
-        return figure
-    elif size_selected == 0:
-        layout.update(
-            {"height": 300,
-             "width": 500,
-             },
-        )
-        return figure
-    else:
-        layout.update(
-            {"height": 800,
-             "width": 1200,
-             },
-        )
-        return figure
+    return figure
 
 
 server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-# TODO: change labellings

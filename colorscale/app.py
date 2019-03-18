@@ -25,7 +25,7 @@ app.layout = html.Div([
         'textAlign': "center"
     }),
     html.Div([
-        html.Div([html.H6("Select City"),
+        html.Div([html.Span("Choose City"),
                   dcc.Dropdown(
                       id="selected-city",
                       options=[{
@@ -34,7 +34,7 @@ app.layout = html.Div([
                       value="Auckland",
 
                   )], style={'width': '48%', "float": "left"}),
-        html.Div([html.H6("Select Color Scale"),
+        html.Div([html.Span("Choose Color-Scale"),
                   dcc.Dropdown(
                       id="selected-color",
                       options=[{
@@ -95,7 +95,7 @@ def update_figure(selected, selected_color):
                 "showline": True
             },
             font={"color": "#ffffff"},
-            paper_bgcolor="#503A3A",
+            paper_bgcolor="#1C0707",
             plot_bgcolor="#1C0707"
         )
 

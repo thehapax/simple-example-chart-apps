@@ -23,7 +23,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Employment wage data")
+        html.H1("Employment wage rigidity"),
 
     ], style={"text-align": "center"}),
     html.Div(
@@ -65,7 +65,7 @@ def update_figure(selected_year):
         y=dff["Hourly workers"],
         x=dff["Date"],
         mode='lines+markers',
-        marker={"size": 4},
+        marker={"size": 3.5},
         name="Hourly"
 
     )
@@ -73,7 +73,7 @@ def update_figure(selected_year):
         y=dff['Non-hourly workers'],
         x=dff["Date"],
         mode='markers',
-        marker={"size": 4},
+        marker={"size": 3},
         name="Non-Hourly"
 
     )
@@ -81,7 +81,7 @@ def update_figure(selected_year):
         y=dff["High school"],
         x=dff["Date"],
         mode='lines',
-        marker={"size": 4},
+        marker={"size": 2},
         name="High school"
 
     )
@@ -89,7 +89,7 @@ def update_figure(selected_year):
         y=dff["Construction"],
         x=dff["Date"],
         mode='lines+markers',
-        marker={"size": 4},
+        marker={"size": 3.5},
         name="Construction"
 
     )
@@ -97,7 +97,7 @@ def update_figure(selected_year):
         y=dff["Finance"],
         x=dff["Date"],
         mode='lines',
-        marker={"size": 4},
+        marker={"size": 2},
         name="Finance"
 
     )
@@ -105,7 +105,7 @@ def update_figure(selected_year):
         y=dff["Manufacturing"],
         x=dff["Date"],
         mode='markers',
-        marker={"size": 4},
+        marker={"size": 3},
         name="Manufacturing"
 
     )
@@ -114,13 +114,13 @@ def update_figure(selected_year):
     return {
         "data": data,
         "layout": go.Layout(
-            title="Wages in different employment sector vs time",
+            title=f"Wage Rigidity for {'-'.join(str(i) for i in selected_year)}",
             xaxis={
-                "title": f"For the year {'-'.join(str(i)for i in selected_year)}",
+
                 "tickangle": 45,
             },
             yaxis={
-                "title": "Wages",
+                "title": "% of Jobstayers with a wage change of zero",
                 "range": [0, 25],
                 "tick0": 0,
                 "dtick": 5,
@@ -135,3 +135,5 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+

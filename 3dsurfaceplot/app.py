@@ -78,6 +78,4 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO:
-# xaxis/yaxis inside the scene.
-# home button resets camera eye.
+

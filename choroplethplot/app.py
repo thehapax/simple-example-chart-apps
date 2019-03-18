@@ -12,7 +12,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Demographic data by country")
+        html.H1("Demographic Data by Country")
     ], style={
         'textAlign': "center",
         "padding-bottom": "30"}),
@@ -83,5 +83,4 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO: Change podition of colorbar
- # cant be horizontal.
+

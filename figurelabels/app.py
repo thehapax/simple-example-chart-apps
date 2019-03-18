@@ -13,12 +13,12 @@ df = df1.iloc[0:50]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-font = ["Arial", "Balto", "Courier New", "PT Sans Narrow", "Times New Roman", "Comic Sans MS",
+font = ["Arial", "Open Sans","Balto", "Courier New", "PT Sans Narrow", "Times New Roman", "Comic Sans MS",
         "cursive"]
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Credit Score Statistics")
+        html.H1("Financial Statistics by Age")
 
     ], style={
         'textAlign': "center"
@@ -26,16 +26,7 @@ app.layout = html.Div([
 
     html.Div([
         html.Div([
-            html.Div([
-                dcc.Input(id='size-input', type='number', value=15),
-                html.Button(id='submit-button', children="Submit font size"),
 
-            ], style={"display": "block",
-                      "margin-left": "auto",
-                      "margin-right": "auto",
-                      "width": "40%",
-                      "padding": "10"
-                      }),
             html.Div([daq.ColorPicker(
                 id='my-color-picker',
                 label='Color Picker',
@@ -47,7 +38,7 @@ app.layout = html.Div([
 
             html.Div([dcc.Dropdown(id="select-font",
                                    options=[{'label': i, 'value': i} for i in font],
-                                   value="Helvetica Neue",
+                                   value="Open Sans",
                                    placeholder="Select a font",
                                    style={
                                        "display": "block",
@@ -56,12 +47,23 @@ app.layout = html.Div([
                                        "width": "70%",
 
                                    }
-                                   )], style={"padding": 10})
+                                   )], style={"padding": 10}),
+            html.Div([
+                            dcc.Input(id='size-input', type='number', value=15),
+                            html.Button(id='submit-button', children="Submit font size"),
+
+                        ], style={"display": "block",
+                                  "margin-left": "auto",
+                                  "margin-right": "auto",
+                                  "width": "40%",
+                                  "padding": "10"
+                                  }),
 
         ], className="six columns"),
         html.Div([
             html.Div([
-                html.Div(
+                html.Div([
+                    html.Span("Category"),
                     dcc.Dropdown(
                         id="selected-type",
                         options=[
@@ -75,7 +77,7 @@ app.layout = html.Div([
                             { 'label':"Dependents",'value':'NumberOfDependents'}
                         ],
                         value='MonthlyIncome',
-                    ), style={
+                    )], style={
                         "display": "block",
                         "margin-left": "auto",
                         "margin-right": "auto",
@@ -150,4 +152,3 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO : remove circle from color picker
