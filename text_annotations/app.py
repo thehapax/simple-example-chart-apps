@@ -23,17 +23,6 @@ app.layout = html.Div([
         html.H1("Temperatures in New York")
     ], style={'textAlign': "center"}),
     html.Div([
-        html.Div([
-            dcc.RadioItems(
-                id="select-text",
-                options=[
-                    {'label': 'Add annotations', 'value': 1},
-                    {'label': 'Remove annotations', 'value': 0}
-                ],
-                value=1,
-                labelStyle={'display': 'inline-block', "padding": 5})
-        ], className="six columns"),
-
         html.Div([dcc.Dropdown(
             id='value-selected',
             options=[{"label": i, 'value': i} for i in df.columns[1:]],
@@ -41,11 +30,29 @@ app.layout = html.Div([
             multi=True
 
         )
-        ], className="six columns")
+        ],style={
+            "display":"block",
+            "margin-left": "auto",
+            "margin-right": "auto",
+            "width": "60%"
+        })
 
     ], className="row"),
 
     dcc.Graph(id="my-graph"),
+    html.Div([
+                dcc.RadioItems(
+                    id="select-text",
+                    options=[
+                        {'label': 'Add annotations', 'value': 1},
+                        {'label': 'Remove annotations', 'value': 0}
+                    ],
+                    value=1,
+                    labelStyle={'display': 'inline-block', "padding": 30})
+            ],style={"display": "block",
+              "margin-left": "auto",
+              "margin-right": "auto",
+              "width": "60%"}),
 
     html.Div([
         dcc.Input(id='x-input', type='text', placeholder="Input month", value=''),
@@ -56,8 +63,7 @@ app.layout = html.Div([
     ], style={"display": "block",
               "margin-left": "auto",
               "margin-right": "auto",
-              "width": "60%",
-              "padding": 20
+              "width": "100%",
               }),
 ], className="container")
 
@@ -118,7 +124,7 @@ def update_graph(selected, add_text, n_clicks, x_value, y_value, text):
                  'xref': 'x',
                  'yref': 'y',
                  'text': text,
-                 'showarrow': False,
+                 'showarrow': True,
                  'align': 'center',
                  }
             ],
