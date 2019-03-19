@@ -32,7 +32,7 @@ app.layout = html.Div([
             id="select-survival",
             options=[{'label': "Survived", 'value': 1},
                      {'label': "Dead", 'value': 0}],
-            value=0,
+            value=1,
             labelStyle={'display': 'inline-block',
                         'padding': 10}
         )
@@ -58,7 +58,7 @@ app.layout = html.Div([
 def update_scatter(selected, hoverdata):
     dff = df[df["Survived"] == selected]
     trace = []
-    for sex in dff["Sex"].unique():
+    for sex in ["male","female"]:
         trace.append(go.Scatter(
             x=dff[dff["Sex"] == sex]["Age"],
             y=dff[dff["Sex"] == sex]["Fare"],
