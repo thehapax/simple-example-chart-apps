@@ -6,6 +6,8 @@ Created on Mon Feb  4 10:27:37 2019
 @author: divyachandran
 """
 
+import math
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -43,7 +45,7 @@ app.layout = html.Div([
             dcc.Graph(id="scatter-graph",
                       hoverData={'points': [{'customdata': '30'}]})], className="six columns"),
         html.Div([
-            dcc.Graph(id="hist-graph",clear_on_unhover=True,)],className="six columns"),
+            dcc.Graph(id="hist-graph", clear_on_unhover=True, )], className="six columns"),
     ]),
 ], className="container")
 
@@ -70,11 +72,11 @@ def update_scatter(selected, hoverdata):
 
     layout = go.Layout(
         title=f"Fare vs Age",
-        colorway = ["#7603F1", "#F200CC"],
+        colorway=["#7603F1", "#F200CC"],
         hovermode='closest',
         xaxis={
             "title": "Age",
-            "range": [0, 75],
+            "range": [-2, 75],
             "tick0": 0,
             "dtick": 5,
             "showgrid": False
@@ -98,23 +100,22 @@ def update_scatter(selected, hoverdata):
         age = hoverdata["points"][0]['x']
         size1 = []
         for i in dff[dff["Sex"] == "male"]["Age"]:
-            if i == round(age):
-                size1.append(30)
+            if math.isclose(i, age, rel_tol=0.2):
+                size1.append(25)
             else:
                 size1.append(10)
-        size2=[]
+        size2 = []
         for i in dff[dff["Sex"] == "female"]["Age"]:
-            if i == round(age):
-                size2.append(30)
+            if math.isclose(i, age, rel_tol=0.2):
+                size2.append(25)
             else:
                 size2.append(10)
         # noinspection PyTypeChecker
         figure1["data"][0].update(go.Scatter
-                        (marker={"size": size1, "opacity": 1}))
+                                  (marker={"size": size1, "opacity": 1}))
         # noinspection PyTypeChecker
         figure1["data"][1].update(go.Scatter
                                   (marker={"size": size2, "opacity": 1}))
-
 
     return figure1
 
@@ -135,7 +136,6 @@ def update_graph(selected, hoverdata1):
         xbins={
             "size": 5},
         customdata=dff["Age"],
-
 
     )
     layout = go.Layout(
@@ -188,4 +188,4 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# todo: hover from hist on scatter, not hovering after bin 45
+# todo: hover from hist on scatter, not hovering after selection
