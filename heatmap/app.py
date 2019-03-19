@@ -28,7 +28,7 @@ app.layout = html.Div([
                      }
                      )
     ]),
-    dcc.Graph(id="my-graph")
+    dcc.Graph(id="my-graph",style={"margin-right":200})
 ], className="container")
 
 
