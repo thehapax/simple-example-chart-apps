@@ -264,5 +264,7 @@ def update_figure(grid, label, line, tick_color, n_clicks1, axes_color, axes_fon
     }
 
 
+server = app.server
+
 if __name__ == '__main__':
     app.run_server(debug=True)
