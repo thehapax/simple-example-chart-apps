@@ -81,12 +81,10 @@ def ugdate_figure(selected_x, selected_y, selected_z):
     return {
         "data": trace,
         "layout": go.Layout(
-            font={
-                "color": "#FFFAF6"
-            },
+
             height=700,
             title=f"Exports",
-            paper_bgcolor="#262222",
+            paper_bgcolor="#A9BBCB",
             scene={
                 "aspectmode": "cube",
 
