@@ -1,5 +1,8 @@
+import re
+
 import dash
 import dash_core_components as dcc
+import dash_daq as daq
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
@@ -12,7 +15,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Iris Flower"),
+        html.H1("Iris Species Comparison"),
     ], style={
         'textAlign': "center"}),
     html.Div([
@@ -32,7 +35,7 @@ app.layout = html.Div([
             dcc.RadioItems(id="yaxis",
                            options=[
                                {'label': 'Petal Length', 'value': 'PetalLength'},
-                               {'label': 'Petal Width', 'value': 'PetallWidth'}, ],
+                               {'label': 'Petal Width', 'value': 'PetalWidth'}, ],
                            value='PetalLength',
                            labelStyle={"display": "inline", "padding": 10}
 
@@ -47,34 +50,29 @@ app.layout = html.Div([
             html.Div([
                 html.Span("Legend Visible", className="six columns",
                           style={'textAlign': "right", "text-decoration": "underline"}),
-                dcc.RadioItems(id="legend",
-                               options=[
-                                   {'label': 'Show', 'value': 1},
-                                   {'label': 'Hide', 'value': 0},
-                               ],
-                               value=1,
-                               labelStyle={"display": "inline", "padding": 5},
-                               className="six columns"
-                               ),
+                daq.BooleanSwitch(id="legend",
+                                  on=True,
+                                  color="#137d1c",
+                                  className="six columns"
+                                  ),
             ], className="six columns"),
 
             html.Div([
                 html.Span("Legend Orientation", className="six columns",
                           style={'textAlign': "right", "text-decoration": "underline"}),
-                dcc.RadioItems(id="position",
-                               options=[
-                                   {'label': 'Horizontal', 'value': 'h'},
-                                   {'label': 'vertical', 'value': 'v'},
-                               ],
-                               value="v",
-                               labelStyle={"display": "inline", "padding": 5},
-                               className="six columns"
-                               )
+                daq.ToggleSwitch(id="position",
+                                 value=True,
+                                 label="Horizontal_________Vertical",
+                                 labelPosition="bottom",
+                                 className="six columns"
+                                 )
             ], className="six columns")
         ])
     ], className="row", style={"padding": 10}),
 
     html.Div([
+        html.Span("Legend Position:Input X and Y values", className="row",
+                  style={'textAlign': "center", "padding": 20, "margin": 5, "text-decoration": "underline"}),
         dcc.Input(id="x-value", type="number", value=1),
         dcc.Input(id="y-value", type="number", value=1),
         html.Button('Submit', id="button")
@@ -88,7 +86,7 @@ app.layout = html.Div([
     dash.dependencies.Output("my-graph", "figure"),
     [dash.dependencies.Input("xaxis", "value"),
      dash.dependencies.Input("yaxis", "value"),
-     dash.dependencies.Input("legend", "value"),
+     dash.dependencies.Input("legend", "on"),
      dash.dependencies.Input("position", "value"),
      dash.dependencies.Input("button", "n_clicks")],
     [dash.dependencies.State("x-value", "value"),
@@ -113,16 +111,16 @@ def update_graph(x_axis, y_axis, legend, position, n_clicks, xvalue, yvalue):
         "layout": go.Layout(
             title=f"Iris data",
             xaxis={
-                "title": f"{x_axis}"
+                "title": f"{re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', x_axis)}"
             },
             yaxis={
-                "title": f"{y_axis}"
+                "title": f"{re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', y_axis)}"
             },
             colorway=["#E20048", "#CEF600", "#FFCB00"],
             legend={"x": xvalue,
                     "y": yvalue,
-                    "orientation": position},
-            showlegend=bool(legend)
+                    "orientation": f'{"v" if position == True else "h"}'},
+            showlegend=legend
         )
 
     }
