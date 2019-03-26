@@ -33,30 +33,36 @@ app.layout = html.Div([
             html.Div([
                 html.Span("Grid-Lines", className="four columns", style={"text-align": "right"}),
                 html.Div(
-                    daq.ToggleSwitch(
+                    daq.BooleanSwitch(
                         id='grid-type',
                         label='Hide______Show',
-                        value=True,
+                        labelPosition="bottom",
+                        color="#2b7b26",
+                        on=True,
                     ), className="eight columns"
                 )
             ], className="row", style={"padding": 5}),
             html.Div([
                 html.Span("Tick-Labels", className="four columns", style={"text-align": "right"}),
                 html.Div(
-                    daq.ToggleSwitch(
+                    daq.BooleanSwitch(
                         id='label-type',
                         label='Hide______Show',
-                        value=True,
+                        labelPosition="bottom",
+                        color="#2b7b26",
+                        on=True,
                     ), className="eight columns"
                 )
             ], className="row", style={"padding": 5}),
             html.Div([
                 html.Span("Line", className="four columns", style={"text-align": "right"}),
                 html.Div(
-                    daq.ToggleSwitch(
+                    daq.BooleanSwitch(
                         id='line-type',
                         label='Hide______Show',
-                        value=True,
+                        labelPosition="bottom",
+                        color="#2b7b26",
+                        on=True,
                     ), className="eight columns"
                 )
             ], className="row", style={"padding": 5}),
@@ -154,9 +160,9 @@ app.layout = html.Div([
 
 @app.callback(
     Output('my-graph', 'figure'),
-    [Input('grid-type', 'value'),
-     Input('label-type', 'value'),
-     Input('line-type', 'value'),
+    [Input('grid-type', 'on'),
+     Input('label-type', 'on'),
+     Input('line-type', 'on'),
      Input("range", 'value'),
      Input('tick-color-picker', 'value'),
      Input('axes-color-picker', 'value'),
@@ -204,9 +210,9 @@ def update_figure(grid, label, line, range, tick_color, axes_color, axes_font, s
         showlegend=False,
         height=600,
         xaxis={
-            "showgrid": bool(grid),
-            "showline": bool(line),
-            "showticklabels": bool(label),
+            "showgrid": grid,
+            "showline": line,
+            "showticklabels": label,
             "tickcolor": color1,
             "ticklen": len - 4,
             "tickwidth": width - 4,
@@ -223,9 +229,9 @@ def update_figure(grid, label, line, range, tick_color, axes_color, axes_font, s
         },
 
         yaxis={
-            "showgrid": bool(grid),
-            "showline": bool(line),
-            "showticklabels": bool(label),
+            "showgrid": grid,
+            "showline": line,
+            "showticklabels":label,
             "tickcolor": color1,
             "range": [range[0] + 1000, range[1] * 100000],
             "ticklen": len,
@@ -237,9 +243,9 @@ def update_figure(grid, label, line, range, tick_color, axes_color, axes_font, s
 
         },
         yaxis2={
-            "showgrid": bool(grid),
-            "showline": bool(line),
-            "showticklabels": bool(label),
+            "showgrid": grid,
+            "showline": line,
+            "showticklabels":label,
             "tickcolor": color1,
             "range": [range[0], range[1]],
             "ticklen": len,
