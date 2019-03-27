@@ -8,3 +8,7 @@
     border: solid 2px #A2A2A2;
     background-color: #A2A2A2;
 }
+
+.rc-slider-handle:hover{
+    border: 2px solid #A2A2A2;
+}

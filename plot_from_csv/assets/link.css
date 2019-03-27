@@ -28,3 +28,6 @@
 .rc-slider-dot-active,.rc-slider-handle {
     border: 2px solid #8e2138;
 }
+.rc-slider-handle:hover {
+    border: 2px solid #8e2138;
+}
