@@ -25,7 +25,7 @@ app.layout = html.Div([
                               ), className="four columns", style={"display": "block",
                                                                   "margin-left": "auto",
                                                                   "margin-right": "auto",
-                                                                  "width": 310
+                                                                  "width":"33%"
                                                                   }),
         html.Div(dcc.Dropdown(id="select-yaxis",
                               options=[{'label': i.title(), 'value': i} for i in df.columns[3:]],
@@ -34,7 +34,7 @@ app.layout = html.Div([
                               ), className="four columns", style={"display": "block",
                                                                   "margin-left": "auto",
                                                                   "margin-right": "auto",
-                                                                  "width": 310
+                                                                  "width": "33%"
                                                                   }),
         html.Div(dcc.Dropdown(id="select-zaxis",
                               options=[{'label': i.title(), 'value': i} for i in df.columns[3:]],
@@ -43,10 +43,10 @@ app.layout = html.Div([
                               ), className="four columns", style={"display": "block",
                                                                   "margin-left": "auto",
                                                                   "margin-right": "auto",
-                                                                  "width": 310
+                                                                  "width": "33%"
                                                                   })
 
-    ], className="row", style={"padding": 14}),
+    ], className="row", style={"padding": 14,"display":"block","margin-left":"auto","margin-right":"auto","width":"80%"}),
     html.Div([dcc.Graph(id="my-graph")])
 
 ], className="container")
