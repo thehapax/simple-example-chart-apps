@@ -72,13 +72,13 @@ def update_figure(selected_1, selected_2):
             colorway=["#287D95", "#EF533B"],
             legend={"x": 0.7, "y": 1, 'orientation': "h"},
             xaxis={
-                "title": "Year"
+                "title": "Date"
             },
-            yaxis={'title': f'Rainfall(mm) for {selected_1}',
+            yaxis={'title': f'Rainfall (mm) for {selected_1}',
 
                    "range": [0, 300]
                    },
-            yaxis2={'title': f'Rainfall(mm) for {selected_2}',
+            yaxis2={'title': f'Rainfall (mm) for {selected_2}',
                     'overlaying': 'y',
                     'side': 'right',
                     "range": [0, 300],
