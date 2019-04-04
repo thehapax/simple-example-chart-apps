@@ -12,7 +12,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Demographic data over continents")
+        html.H1("Country Demographic Data by Continent")
     ], style={
         'textAlign': "center",
         "padding-bottom": "30"}),
@@ -45,11 +45,11 @@ def update_figure(selected):
         y=dff["lifeExp"],
         text=dff["country"],
         mode="markers",
-        name= selected,
+        name=selected,
         marker={
             'size': 10,
-            'line': {'width': 0.5, 'color': '#19D1F3'},
-            "color": "#19D1F3",
+            'line': {'width': 0.5, 'color': '#43a2ca'},
+            "color": "#7bccc4",
             'opacity': 0.7,
         },
 
@@ -58,7 +58,8 @@ def update_figure(selected):
     return {
         "data": [trace],
         "layout": go.Layout(
-            title="Life Expectancy vs Gdp Per capita",
+            title="Life Expectancy vs. GDP Per Capita",
+            hovermode='closest',
             xaxis={
                 "title": 'GDP Per Capita (USD)',
                 "range": [0, 40000],
@@ -83,9 +84,9 @@ def update_figure(selected):
                     'x1': dff["gdpPercap"].quantile(q=0.90),
                     'y1': dff["lifeExp"].quantile(q=0.90),
                     'opacity': 0.5,
-                    'fillcolor': '#0196B2',
+                    'fillcolor': '#f0f9e8',
                     'line': {
-                        'color': '#0196B2',
+                        'color': '#bae4bc',
                     },
                 }
 
@@ -100,4 +101,3 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
