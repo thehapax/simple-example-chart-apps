@@ -13,7 +13,6 @@ import pandas as pd
 import plotly.graph_objs as go
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 df = pd.read_csv(
     'https://gist.githubusercontent.com/chriddyp/'
@@ -24,29 +23,20 @@ df = pd.read_csv(
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.H1("US Export", style={"textAlign": "center"}),
+    html.H1("Food Product Exports in the United States", style={"textAlign": "center"}),
     html.Div([
         html.Div([
             dcc.Dropdown(
                 id='product-selected1',
                 options=[{'label': i.title(), 'value': i} for i in df.columns.values[2:]],
-                value="poultry")], className="six columns"),
+                value="poultry")], className="six columns", style={"width": "40%", "float": "right"}),
         html.Div([
             dcc.Dropdown(
                 id='product-selected2',
                 options=[{'label': i.title(), 'value': i} for i in df.columns.values[2:]],
-                value='beef')], className="six columns"),
+                value='beef')], className="six columns", style={"width": "40%", "float": "left"}),
 
-    ], className="row", style={
-        'margin': {
-            'right': 200,
-            'left': 200
-
-        },
-        'padding-right': 10,
-        'padding-left': 10,
-
-    }),
+    ], className="row", style={"padding": 50, "width": "60%", "margin-left": "auto", "margin-right": "auto"}),
     dcc.Graph(id='my-graph')
 
 ], className="container")
@@ -57,7 +47,7 @@ app.layout = html.Div([
     [dash.dependencies.Input('product-selected1', 'value'),
      dash.dependencies.Input('product-selected2', 'value')])
 def update_graph(selected_product1, selected_product2):
-    dff = df[(df[selected_product1] >= 50) & (df[selected_product2] >= 50)]
+    dff = df[(df[selected_product1] >= 2) & (df[selected_product2] >= 2)]
 
     trace1 = go.Bar(
         x=dff['state'],
@@ -98,6 +88,7 @@ def update_graph(selected_product1, selected_product2):
                     'size': 14,
 
                 },
+
                 'tickfont': {
                     'color': 'black'
 
