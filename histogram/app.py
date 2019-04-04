@@ -22,7 +22,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("TITANIC")
+        html.H1("Titanic Passenger Statistics")
 
     ], style={
         'textAlign': "center", 'padding': 10
@@ -66,23 +66,24 @@ def update_scatter(selected, hoverdata):
             name=sex.title(),
             customdata=dff[dff["Sex"] == sex]["Age"],
             marker={
-                "size": 10
+                "size": 10,
+                "line" : {"color": "#25232C","width": .5}
             }
         ))
 
     layout = go.Layout(
-        title=f"Fare vs Age",
+        title=f"Passenger fare vs Age",
         colorway=["#7603F1", "#F200CC"],
         hovermode='closest',
         xaxis={
-            "title": "Age",
+            "title": "Age (years)",
             "range": [-2, 75],
             "tick0": 0,
             "dtick": 5,
             "showgrid": False
         },
         yaxis={
-            "title": "Fare",
+            "title": "Passenger fare (£)",
             "range": [-30, 300],
             "tick0": 0,
             "dtick": 25,
@@ -133,6 +134,9 @@ def update_graph(selected, hoverdata1):
         x=dff["Age"],
         opacity=0.7,
         name="Male",
+        marker={
+            "line": {"color": "#25232C", "width":0.2}
+        },
         xbins={
             "size": 5},
         customdata=dff["Age"],
@@ -141,7 +145,7 @@ def update_graph(selected, hoverdata1):
     layout = go.Layout(
         title=f"Age Distribution",
         xaxis={
-            "title": "Age",
+            "title": "Age (years)",
             "showgrid": False
         },
         yaxis={
