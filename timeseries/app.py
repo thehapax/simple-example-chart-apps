@@ -21,7 +21,7 @@ df['Date'] = pd.to_datetime(df.Date, infer_datetime_format=True)
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.H1('Stock Ticker', style={'textAlign': 'center'}),
+    html.H1("Stock Prices", style={'textAlign': 'center'}),
     dcc.Dropdown(
         id='my-dropdown',
         options=[
@@ -78,7 +78,7 @@ def update_graph(selected_dropdown_value):
         'layout': go.Layout(
             colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400', '#FF0056'],
             height=600,
-            title=f"{','.join(str(dropdown[i]) for i in selected_dropdown_value)} Stock Values vs Time",
+            title=f"Opening and Closing Prices for {', '.join(str(dropdown[i]) for i in selected_dropdown_value)} Over Time",
             xaxis={'rangeselector': {'buttons': list([
                 {'count': 1, 'label': '1M', 'step': 'month', 'stepmode': 'backward'},
                 {'count': 6, 'label': '6M', 'step': 'month', 'stepmode': 'backward'},
