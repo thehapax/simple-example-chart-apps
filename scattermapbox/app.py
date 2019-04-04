@@ -15,7 +15,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Airport locations In the United States")
+        html.H1("Airport Locations in the United States")
     ], style={
         'textAlign': "center",
         "padding-bottom": "10",
