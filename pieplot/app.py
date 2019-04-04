@@ -21,7 +21,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Ebola Cases reported in Africa - 2014")], style={"textAlign": "center"}),
+        html.H1("Ebola Cases Reported in Africa - 2014")], style={"textAlign": "center"}),
     dcc.Graph(id="my-graph"),
     html.Div([dcc.Slider(
         id='month-selected',
@@ -66,7 +66,7 @@ def update_graph(selected):
         )
         ],
         "layout": go.Layout(
-            title=f'Cases reported monthly',
+            title=f"Cases Reported Monthly",
             margin={"l": 300, "r": 300, },
             legend={"x": 1, "y": 0.7}
         )
