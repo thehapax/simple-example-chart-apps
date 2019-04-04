@@ -84,13 +84,13 @@ def update_figure(selected, selected_color):
         "data": [trace],
 
         "layout": go.Layout(
-            title=f'Rainfall for {selected} vs Date ',
+            title=f'Rainfall for {selected} Over Time',
             xaxis={
-                "title": "Dates"
+                "title": "Date"
 
             },
             yaxis={
-                "title": "Rainfall(mm)",
+                "title": "Rainfall (mm)",
                 "range": [0, 350],
                 "showline": True
             },
