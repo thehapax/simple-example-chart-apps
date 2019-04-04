@@ -18,14 +18,14 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcar
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.Div([html.H1("Car Performance Subplots")], style={"textAlign": "center"}),
+    html.Div([html.H1("Car Performance Metrics")], style={"textAlign": "center"}),
     html.Div([
         html.Div([
             html.Div([
-                html.Span("Scatterplot X-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right" }),
+                html.Span("Scatter Plot x-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right" }),
                 html.Div(dcc.Dropdown(id="xaxis",
                              options=[{'label': "Miles per gallon", 'value': "mpg"},
-                                      {'label': "Displacement (cu.in.)", 'value': "disp"},
+                                      {'label': "Displacement", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
                                       {'label': "1/4 mile time", 'value': "qsec"}],
@@ -33,10 +33,10 @@ app.layout = html.Div([
 
                                       ),className="three columns",style={"width": 250,"margin":0})],className="row"),
             html.Div([
-                html.Span("Scatterplot Y-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right"}),
+                html.Span("Scatter Plot y-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right"}),
                 html.Div(dcc.Dropdown(id="yaxis",
                              options=[{'label': "Miles per gallon", 'value': "mpg"},
-                                      {'label': "Displacement (cu.in.)", 'value': "disp"},
+                                      {'label': "Displacement", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
                                       {'label': "1/4 mile time", 'value': "qsec"}],
@@ -57,11 +57,11 @@ app.layout = html.Div([
             html.Div([
                 html.Span("Box Plot y-axis",className="three columns",style={"width": 150,"padding": 10,"text-align":"right" }),
                 html.Div(dcc.Dropdown(id="boxplot-yaxis",
-                             options=[{'label': "Miles per gallon", 'value': "mpg"},
-                                      {'label': "Displacement (cu.in.)", 'value': "disp"},
+                             options=[{'label': "Miles per gallon ", 'value': "mpg"},
+                                      {'label': "Displacement", 'value': "disp"},
                                       {'label': "Rear axle ratio", 'value': "drat"},
                                       {'label': "Weight (1000 lbs)", 'value': "wt"},
-                                      {'label': "1/4 mile time", 'value': "qsec"}],
+                                      {'label': "1/4 mile time ", 'value': "qsec"}],
                              value='mpg',
               ) ,className="three columns",style={"width": 250,"margin":0})
             ], className="row")
@@ -101,6 +101,7 @@ def update_graph(selected1, selected2, selected_box_y, selected_box_x):
         x=df[selected_box_x],
         y=df[selected_box_y],
         name=f'{"Transmission" if selected_box_x == "am" else "Engine Type"}',
+        showlegend=False,
         xaxis='x2',
         yaxis='y2',
         marker={
@@ -118,23 +119,24 @@ def update_graph(selected1, selected2, selected_box_y, selected_box_x):
     )]
 
     trace = trace1 + trace2 + trace3
-    text = {"mpg": "Miles per gallon", "disp": "Displacement (cu.in.)", "drat": "Rear axle ratio",
-            "qsec": "1/4 mile time", "wt": "Weight (1000 lbs)"}
+    text = {"mpg": "Miles per gallon (mpg)", "disp": "Displacement (cu.in.)", "drat": "Rear axle ratio (drat)",
+            "qsec": "1/4 mile time (qsec)", "wt": "Weight (1000 lbs)"}
     return {
 
         "data": trace,
         "layout": go.Layout(
-            height=600,
+            height=800,
+            width = 1000,
             annotations=[
                 {
                     "x": 0.07,
                     "y": 1,
                     "xref": "paper",
                     "yref": "paper",
-                    "text": f'{text[selected2]} vs {text[selected1]}',
+                    "text": f'{text[selected2].title()} vs {text[selected1].title()}',
                     "showarrow": False,
                     "font": {
-                        "size": 12
+                        "size": 10
                     }
                 },
                 {
@@ -142,10 +144,10 @@ def update_graph(selected1, selected2, selected_box_y, selected_box_x):
                     "y": 1,
                     "xref": "paper",
                     "yref": "paper",
-                    "text": f'{"Transmission" if selected_box_x == "am" else "Engine Type"}',
+                    "text": f'{text[selected_box_y].title()} vs {"Transmission" if selected_box_x == "am" else "Engine Type"}',
                     "showarrow": False,
                     "font": {
-                        "size": 12
+                        "size": 10
                     }
                 },
                 {
@@ -156,7 +158,7 @@ def update_graph(selected1, selected2, selected_box_y, selected_box_x):
                     "text": f'Gross Horsepower Vs Manufacturer',
                     "showarrow": False,
                     "font": {
-                        "size": 12
+                        "size": 10
                     }
                 },
             ],
@@ -171,13 +173,13 @@ def update_graph(selected1, selected2, selected_box_y, selected_box_x):
             },
             xaxis2={
                 "title": f'{"Automatic transmission   Manual transmission " if selected_box_x == "am" else "V-shaped engine   Straight engine"}',
-                "domain": [0.60, 1], "anchor": 'y2',
+                "domain": [0.55, 1], "anchor": 'y2',
                 "showticklabels": False,
 
             },
             yaxis2={
                 "title": text[selected_box_y],
-                "domain": [0.65, 1],
+                "domain": [0.55, 1],
                 "anchor": 'x2'
             },
             xaxis3={
@@ -186,7 +188,7 @@ def update_graph(selected1, selected2, selected_box_y, selected_box_x):
             },
             yaxis3={
                 "title": "Gross Horsepower(hp)",
-                "domain": [0, 0.50], "anchor": 'x3'
+                "domain": [0, 0.45], "anchor": 'x3'
             }
         )
 
