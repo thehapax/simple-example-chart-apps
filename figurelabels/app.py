@@ -4,14 +4,12 @@ import dash_daq as daq
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
-from dash.dependencies import Input, Output, State
-
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+from dash.dependencies import Input, Output
 
 df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/data.csv')
 df = df1.iloc[0:50]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 font = ["Arial", "Open Sans", "Balto", "Courier New", "PT Sans Narrow", "Times New Roman", "Comic Sans MS",
         "cursive"]
@@ -27,44 +25,53 @@ app.layout = html.Div([
     html.Div([
         html.Div([
 
-            html.Div([daq.ColorPicker(
-                id='my-color-picker',
-                label='Color Picker',
-                value={"hex": "#08EBF1"},
-            )], style={"display": "block",
-                       "margin-left": "auto",
-                       "margin-right": "auto",
-                       "padding": 10}),
+            html.Div([
+                daq.ColorPicker(
+                    id='my-color-picker',
+                    label='Select Color : Marker & Title',
+                    value={"hex": "#E6738D"},
+                )], className="row", style={"margin-left": "auto",
+                                            "margin-right": "auto",
+                                            "width": "100%", "padding": 20}),
 
-            html.Div([dcc.Dropdown(id="select-font",
-                                   options=[{'label': i, 'value': i} for i in font],
-                                   value="Open Sans",
-                                   placeholder="Select a font",
-                                   style={
-                                       "display": "block",
+            html.Div([
+                html.Span("Select Font : ", className="four columns",
+                          style={"width": 100, "text-align": "right", "padding": 5}),
+                dcc.Dropdown(id="select-font",
+                             options=[{'label': i, 'value': i} for i in font],
+                             value="Open Sans",
+                             placeholder="Select a font",
+                             style={
+                                 "display": "block",
+                                 "margin-left": "auto",
+                                 "margin-right": "auto",
+                                 "width": "87%"
+                             },
+                             className="eight columns"
+                             )], className="row", style={"display": "block",
+                                                         "margin-left": "auto",
+                                                         "margin-right": "auto",
+                                                         "width": "80%",
+                                                         "padding": 20
+                                                         }),
+            html.Div([
+                html.Span("Input Size : ", className="six columns",
+                          style={"width": 100, "text-align": "right", "padding": 5}),
+                dcc.Input(id='size-input', type='number', value=15, className="six columns"),
+
+            ], className="row", style={"display": "block",
                                        "margin-left": "auto",
                                        "margin-right": "auto",
-                                       "width": "70%",
-
-                                   }
-                                   )], style={"padding": 10}),
-            html.Div([
-                dcc.Input(id='size-input', type='number', value=15),
-                html.Button(id='submit-button', children="Submit font size"),
-
-            ], style={"display": "block",
-                      "margin-left": "auto",
-                      "margin-right": "auto",
-                      "width": "40%",
-                      "padding": "10"
-                      }),
+                                       "width": "80%",
+                                       "padding": 20
+                                       }),
 
         ], className="six columns"),
         html.Div([
             html.Div([
                 html.Div([
-                    html.Span("Category", className="three columns",
-                              style={"width": 100, "text-align": "right", "padding": 10}),
+                    html.Span("Category :", className="five columns",
+                              style={"width": 100, "text-align": "right", "padding-top": 15}),
                     html.Div(dcc.Dropdown(
                         id="selected-type",
                         options=[
@@ -78,7 +85,7 @@ app.layout = html.Div([
                             {'label': "Dependents", 'value': 'NumberOfDependents'}
                         ],
                         value='MonthlyIncome',
-                    ), className="three columns", style={"width": 300, "margin": 0, "padding": 10})], className="row",
+                    ), className="seven columns", style={"width": "60%", "margin": 0, "padding": 10})], className="row",
                     style={"margin": 10, "padding": 10}),
 
                 dcc.Graph(id="my-graph", className="row")], className="six columns"),
@@ -93,9 +100,8 @@ app.layout = html.Div([
     [Input('selected-type', 'value'),
      Input("my-color-picker", 'value'),
      Input('select-font', 'value'),
-     Input('submit-button', 'n_clicks')],
-    [State('size-input', 'value')])
-def update_figure(selected_type, selected_color, selected_font, n_clicks, size):
+     Input('size-input', 'value')])
+def update_figure(selected_type, selected_color, selected_font, size):
     color = selected_color["hex"]
     dropdown = {
         'NumberOfTime30-59DaysPastDueNotWorse': "Past-due(30-59days)",
@@ -115,6 +121,7 @@ def update_figure(selected_type, selected_color, selected_font, n_clicks, size):
         marker={'size': 10,
                 "color": color,
                 "opacity": 0.8,
+                "line": {"color": "#4C5050", "width": 0.5}
                 }, )
 
     return {

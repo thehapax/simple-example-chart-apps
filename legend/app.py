@@ -7,11 +7,9 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/iris.csv')
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
@@ -20,7 +18,8 @@ app.layout = html.Div([
         'textAlign': "center"}),
     html.Div([
         html.Div([
-            html.Span("X-Axis", className="six columns", style={'textAlign': "right", "text-decoration": "underline"}),
+            html.Span("x-Axis : ", className="six columns",
+                      style={'textAlign': "right", "text-decoration": "underline"}),
             dcc.RadioItems(id="xaxis",
                            options=[
                                {'label': 'Sepal Length', 'value': 'SepalLength'},
@@ -31,7 +30,8 @@ app.layout = html.Div([
                            )], className="six columns"),
 
         html.Div([
-            html.Span("Y-Axis", className="six columns", style={'textAlign': "right", "text-decoration": "underline"}),
+            html.Span("y-Axis : ", className="six columns",
+                      style={'textAlign': "right", "text-decoration": "underline"}),
             dcc.RadioItems(id="yaxis",
                            options=[
                                {'label': 'Petal Length', 'value': 'PetalLength'},
@@ -52,6 +52,8 @@ app.layout = html.Div([
                           style={'textAlign': "right", "text-decoration": "underline"}),
                 daq.BooleanSwitch(id="legend",
                                   on=True,
+                                  label="Hide _________ Show",
+                                  labelPosition="bottom",
                                   color="#137d1c",
                                   className="six columns"
                                   ),
@@ -68,7 +70,7 @@ app.layout = html.Div([
                                  )
             ], className="six columns")
         ])
-    ], className="row", style={"padding": 10}),
+    ], className="row", style={"padding": 10, "border": ".5px solid black"}),
 
     html.Div([
         html.Span("Legend Position:Input X and Y values", className="row",

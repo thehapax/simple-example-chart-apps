@@ -5,8 +5,6 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/nz_weather.csv')
 df["Dunedin"] = pd.to_numeric(df["Dunedin"], errors='coerce')
 df["Hamilton"] = pd.to_numeric(df["Hamilton"], errors='coerce')
@@ -15,7 +13,7 @@ df = df.replace("'-", method='bfill')
 col = ["Greens", "YlOrRd", "Bluered", "RdBu", "Reds", "Blues", "Picnic", "Rainbow", "Portland", "Jet", "Hot",
        "Blackbody", "Earth", "Electric", "Viridis", "Cividis"]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([

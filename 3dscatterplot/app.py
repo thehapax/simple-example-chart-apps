@@ -6,13 +6,11 @@ import plotly.graph_objs as go
 
 df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv")
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("US Exports")
+        html.H1("United States Exports")
     ], style={
         'textAlign': "center",
         "padding-bottom": "10",
@@ -25,7 +23,7 @@ app.layout = html.Div([
                               ), className="four columns", style={"display": "block",
                                                                   "margin-left": "auto",
                                                                   "margin-right": "auto",
-                                                                  "width":"33%"
+                                                                  "width": "33%"
                                                                   }),
         html.Div(dcc.Dropdown(id="select-yaxis",
                               options=[{'label': i.title(), 'value': i} for i in df.columns[3:]],
@@ -46,7 +44,8 @@ app.layout = html.Div([
                                                                   "width": "33%"
                                                                   })
 
-    ], className="row", style={"padding": 14,"display":"block","margin-left":"auto","margin-right":"auto","width":"80%"}),
+    ], className="row",
+        style={"padding": 14, "display": "block", "margin-left": "auto", "margin-right": "auto", "width": "80%"}),
     html.Div([dcc.Graph(id="my-graph")])
 
 ], className="container")
@@ -83,8 +82,8 @@ def ugdate_figure(selected_x, selected_y, selected_z):
         "layout": go.Layout(
 
             height=700,
-            title=f"Exports",
-            paper_bgcolor="#A9BBCB",
+            title=f"Exports<br>{selected_x.title(),selected_y.title(),selected_z.title()}",
+            paper_bgcolor="#f3f3f3",
             scene={
                 "aspectmode": "cube",
 
@@ -107,5 +106,3 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-# TODO: minimize window colorscale goes off

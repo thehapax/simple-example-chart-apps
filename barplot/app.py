@@ -12,7 +12,6 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 df = pd.read_csv(
     'https://gist.githubusercontent.com/chriddyp/'
@@ -20,7 +19,7 @@ df = pd.read_csv(
     'c353e8ef842413cae56ae3920b8fd78468aa4cb2/'
     'usa-agricultural-exports-2011.csv')
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.H1("Food Product Exports in the United States", style={"textAlign": "center"}),
@@ -71,12 +70,14 @@ def update_graph(selected_product1, selected_product2):
         'layout': go.Layout(
             title=f'State vs Export: {selected_product1.title()}, {selected_product2.title()}',
             colorway=["#EF963B", "#EF533B"],
+            hovermode="closest",
             xaxis={
                 'title': "State",
                 'titlefont': {
                     'color': 'black',
                     'size': 14},
                 'tickfont': {
+                    'size': 9,
                     'color': 'black'
 
                 }

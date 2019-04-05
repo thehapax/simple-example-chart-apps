@@ -14,11 +14,9 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/titanic.csv')
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
@@ -58,7 +56,7 @@ app.layout = html.Div([
 def update_scatter(selected, hoverdata):
     dff = df[df["Survived"] == selected]
     trace = []
-    for sex in ["male","female"]:
+    for sex in ["male", "female"]:
         trace.append(go.Scatter(
             x=dff[dff["Sex"] == sex]["Age"],
             y=dff[dff["Sex"] == sex]["Fare"],
@@ -67,27 +65,28 @@ def update_scatter(selected, hoverdata):
             customdata=dff[dff["Sex"] == sex]["Age"],
             marker={
                 "size": 10,
-                "line" : {"color": "#25232C","width": .5}
+                "line": {"color": "#25232C", "width": .5}
             }
         ))
 
     layout = go.Layout(
         title=f"Passenger fare vs Age",
-        colorway=["#7603F1", "#F200CC"],
+        colorway=['#fa9fb5', '#c51b8a'],
         hovermode='closest',
         xaxis={
             "title": "Age (years)",
             "range": [-2, 75],
             "tick0": 0,
             "dtick": 5,
-            "showgrid": False
+            "showgrid": False,
+
         },
         yaxis={
             "title": "Passenger fare (£)",
-            "range": [-30, 300],
+            "range": [-15, 300],
             "tick0": 0,
             "dtick": 25,
-            "showgrid": False
+            "showgrid": False,
         },
 
     )
@@ -135,7 +134,7 @@ def update_graph(selected, hoverdata1):
         opacity=0.7,
         name="Male",
         marker={
-            "line": {"color": "#25232C", "width":0.2}
+            "line": {"color": "#25232C", "width": 0.2}
         },
         xbins={
             "size": 5},
@@ -177,9 +176,9 @@ def update_graph(selected, hoverdata1):
         color = []
         for i in range(0, len(bins)):
             if bins[i] == bins[find_bin(float(age), bins)]:
-                color.append("#C7FD00")
+                color.append("#dd1c77")
             else:
-                color.append("#7603F1")
+                color.append("#fa9fb5")
         # noinspection PyTypeChecker
         figure2["data"][0].update(go.Histogram
                                   (marker={"color": color}))
@@ -192,4 +191,4 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# todo: hover from hist on scatter, not hovering after selection
+

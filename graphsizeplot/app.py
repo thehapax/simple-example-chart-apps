@@ -5,12 +5,10 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 df1 = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/Aids%20Data.csv")
 df = df1.groupby(['Indicator', 'Time Period']).mean().reset_index()
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
@@ -80,14 +78,13 @@ app.layout = html.Div([
     [Input('selected-type', 'value'),
      Input('graph-size', 'value')])
 def update_figure(selected, size_selected):
-
     traces = []
     for select in selected:
         traces.append(go.Scatter(
             x=df[df['Indicator'] == select]['Time Period'],
             y=df[df['Indicator'] == select]['Data Value'],
             mode='lines+markers',
-            marker={"size": 6,},
+            marker={"size": 6, },
             showlegend=False
         ))
     layout = go.Layout(
@@ -103,7 +100,7 @@ def update_figure(selected, size_selected):
         height=size_selected,
         width=2 * size_selected,
         autosize=True,
-        colorway=["#003f5c","#955196","#dd5182","#ff6e54","#ffa600","#061460"]
+        colorway=["#003f5c", "#955196", "#dd5182", "#ff6e54", "#ffa600", "#061460"]
     )
 
     figure = {

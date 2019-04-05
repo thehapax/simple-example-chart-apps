@@ -5,10 +5,8 @@ import pandas as pd
 import plotly.graph_objs as go
 import us
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/laucnty16.csv', thousands=',')
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([html.H1("Employment Statistics")], style={
@@ -62,9 +60,10 @@ def update_figure(selected):
             title=f'Monthly Employment stats for {us.states.lookup(str(selected))}',
             autosize=True,
             height=800,
-            scene={"xaxis": {'title': "Monthly Employed(number)","tickfont":{"size":10},'type': "linear"},
-                   "yaxis": {"title": f"County in {us.states.lookup(str(selected))} ","tickfont":{"size":10}, "tickangle": 1},
-                   "zaxis": {'title': "Employment statistics","tickfont":{"size":10}},
+            scene={"xaxis": {'title': "Monthly Employed(number)", "tickfont": {"size": 10}, 'type': "linear"},
+                   "yaxis": {"title": f"County in {us.states.lookup(str(selected))} ", "tickfont": {"size": 10},
+                             "tickangle": 1},
+                   "zaxis": {'title': "Employment statistics", "tickfont": {"size": 10}},
                    "camera": {"eye": {"x": 2, "y": 1, "z": 1.25}},
                    "aspectmode": "cube",
                    }
@@ -77,5 +76,3 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-

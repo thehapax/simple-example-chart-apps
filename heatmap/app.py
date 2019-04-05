@@ -8,14 +8,13 @@ from dash.dependencies import Input, Output
 df1 = pd.read_csv("https://raw.githubusercontent.com/divyachandran-ds/dash1/master/Energy2.csv")
 df = df1.dropna()
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
         html.H1("Energy Consumption Profile by Country")
-    ], style={'textAlign': "center"}),
+    ],className="row", style={'textAlign': "center"}),
     html.Div([
         dcc.Dropdown(id="selected-type",
                      options=[{"label": i, "value": i} for i in df["Indicator Name"].unique()],
@@ -27,8 +26,10 @@ app.layout = html.Div([
                          "width": "80%"
                      }
                      )
-    ]),
-    dcc.Graph(id="my-graph",style={"margin-right":200})
+    ],className="row"),
+    html.Div([
+        dcc.Graph(id="my-graph",style={"margin-right":"auto","margin-left":"auto","width":"80%"})
+    ],className="row")
 ], className="container")
 
 
@@ -50,24 +51,24 @@ def update_figure(selected):
 
         "data": [trace],
         "layout": go.Layout(
+            width=800,
+            height=750,
             title=f"Energy Indicators vs Year",
             xaxis={
                 "title": "Year"
             },
             yaxis={
-                "title": "Countries",
                 "tickmode": "array",
                 "tickvals": dff['Country Name'].unique(),
                 "ticktext": ['Afghanistan', 'Arab World', 'Australia', 'Belgium', 'Bangladesh',
                              'Brazil', 'Canada', 'Colombia', 'Germany', 'East Asia & Pacific',
-                             'Europe & Central Asia', 'India', 'Japan',
-                             'Latin America & Caribbean', 'Middle East & North Africa',
+                             'Europe &<br>Central Asia', 'India', 'Japan',
+                             'Latin America &<br>Caribbean', 'Middle East &<br>North Africa',
                              'Mexico', 'North America', 'Saudi Arabia', 'Singapore',
-                             'Virgin Islands (U.S.)', 'South Africa', 'Zimbabwe'],
+                             'Virgin Islands (US)', 'South Africa', 'Zimbabwe'],
                 "tickfont": {"size": 8},
                 "tickangle": -20
             },
-            margin={"l": 300, "r": 100}
         )
 
     }
@@ -78,4 +79,4 @@ server = app.server
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-# TODO: adjust the margin layout
+
