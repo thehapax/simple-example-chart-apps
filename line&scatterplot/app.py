@@ -116,7 +116,7 @@ def update_figure(selected_year):
         "layout": go.Layout(
             title=f"Wage Rigidity for {'-'.join(str(i) for i in selected_year)}",
             xaxis={
-
+                "title": "Year",
                 "tickangle": 45,
             },
             yaxis={

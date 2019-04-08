@@ -104,13 +104,13 @@ app.layout = html.Div([
 def update_figure(selected_type, selected_color, selected_font, size):
     color = selected_color["hex"]
     dropdown = {
-        'NumberOfTime30-59DaysPastDueNotWorse': "Past-due(30-59days)",
+        'NumberOfTime30-59DaysPastDueNotWorse': "Past-due (30-59days)",
         'DebtRatio': "Debt-ratio",
         'MonthlyIncome': "Income",
         'NumberOfOpenCreditLinesAndLoans': "Open Credits/loans",
-        'NumberOfTimes90DaysLate': "Past-due(90 days)",
+        'NumberOfTimes90DaysLate': "Past-due (90 days)",
         'NumberRealEstateLoansOrLines': "Real estate loans",
-        'NumberOfTime60-89DaysPastDueNotWorse': "Past-due(60-89 days)",
+        'NumberOfTime60-89DaysPastDueNotWorse': "Past-due (60-89 days)",
         'NumberOfDependents': "Dependents"}
 
     trace = go.Scatter(

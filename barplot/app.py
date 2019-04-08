@@ -83,7 +83,7 @@ def update_graph(selected_product1, selected_product2):
                 }
             },
             yaxis={
-                'title': "Export price (USD)",
+                'title': "Export price (million USD)",
                 'titlefont': {
                     'color': 'black',
                     'size': 14,

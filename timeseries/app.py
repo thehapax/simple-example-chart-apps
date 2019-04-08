@@ -13,12 +13,11 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/hello-world-stock.csv')
 df['Date'] = pd.to_datetime(df.Date, infer_datetime_format=True)
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.H1("Stock Prices", style={'textAlign': 'center'}),
@@ -79,11 +78,15 @@ def update_graph(selected_dropdown_value):
             colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400', '#FF0056'],
             height=600,
             title=f"Opening and Closing Prices for {', '.join(str(dropdown[i]) for i in selected_dropdown_value)} Over Time",
-            xaxis={'rangeselector': {'buttons': list([
+            xaxis={"title":"Date",
+                'rangeselector': {'buttons': list([
                 {'count': 1, 'label': '1M', 'step': 'month', 'stepmode': 'backward'},
                 {'count': 6, 'label': '6M', 'step': 'month', 'stepmode': 'backward'},
                 {'step': 'all'}
-            ])}, 'rangeslider': {'visible': True}, 'type': 'date'}
+            ])}, 'rangeslider': {'visible': True}, 'type': 'date'},
+            yaxis={
+                "title":"Price (USD)",
+            }
         )
 
     }

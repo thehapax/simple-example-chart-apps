@@ -113,15 +113,15 @@ def update_graph(x_axis, y_axis, legend, position, n_clicks, xvalue, yvalue):
         "layout": go.Layout(
             title=f"Iris data",
             xaxis={
-                "title": f"{re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', x_axis)}"
+                "title": f"{re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', x_axis)} (cm)"
             },
             yaxis={
-                "title": f"{re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', y_axis)}"
+                "title": f"{re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', y_axis)} (cm)"
             },
             colorway=["#E20048", "#CEF600", "#FFCB00"],
             legend={"x": xvalue,
                     "y": yvalue,
-                    "orientation": f'{"v" if position == True else "h"}'},
+                    "orientation": f'{"v" if position == True else "h"} (cm)'},
             showlegend=legend
         )
 

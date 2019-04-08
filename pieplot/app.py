@@ -12,12 +12,11 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_ebola.csv')
 df = df.dropna(axis=0)
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([

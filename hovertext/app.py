@@ -90,7 +90,7 @@ def update_graph(state, year, text, format):
         title="Air Quality vs County Name",
 
         yaxis={
-            "title": "Concentrations of PM2.5(micrograms/cu.m)",
+            "title": "Concentrations of PM2.5 (micrograms/cu.m)",
             "hoverformat": format
         },
         xaxis={

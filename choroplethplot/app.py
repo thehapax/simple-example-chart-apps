@@ -16,9 +16,9 @@ app.layout = html.Div([
         "padding-bottom": "30"}),
     html.Div([
         dcc.Dropdown(id="value-selected",
-                     options=[{'label': "Population", 'value': 'pop'},
-                              {'label': "GDP Per Capita", 'value': 'gdpPercap'},
-                              {'label': "Life Expectancy", 'value': 'lifeExp'}],
+                     options=[{'label': "Population ", 'value': 'pop'},
+                              {'label': "GDP Per Capita ", 'value': 'gdpPercap'},
+                              {'label': "Life Expectancy ", 'value': 'lifeExp'}],
                      value='lifeExp',
                      style={
                          "display": "block",
@@ -43,11 +43,11 @@ def update_figure(selected):
 
     def title(text):
         if text == "pop":
-            return "Poplulation"
+            return "Poplulation (million)"
         elif text == "gdpPercap":
-            return "GDP Per Capita"
+            return "GDP Per Capita (USD)"
         else:
-            return "Life Expectancy"
+            return "Life Expectancy (Years)"
 
     trace = go.Choropleth(
         locations=dff['iso_alpha'],

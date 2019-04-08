@@ -58,6 +58,7 @@ def update_figure(selected):
                 "title": "Year"
             },
             yaxis={
+                "title": "Country",
                 "tickmode": "array",
                 "tickvals": dff['Country Name'].unique(),
                 "ticktext": ['Afghanistan', 'Arab World', 'Australia', 'Belgium', 'Bangladesh',

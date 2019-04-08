@@ -12,10 +12,9 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([html.H1("Car Performance Metrics")], style={"textAlign": "center"}),
@@ -187,7 +186,7 @@ def update_graph(selected1, selected2, selected_box_y, selected_box_x):
                 "domain": [0, 1], "anchor": 'y3'
             },
             yaxis3={
-                "title": "Gross Horsepower(hp)",
+                "title": "Gross Horsepower (hp)",
                 "domain": [0, 0.45], "anchor": 'x3'
             }
         )

@@ -4,12 +4,10 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Mining-BTC-180.csv')
 df["month"] = pd.DatetimeIndex(df["Date"]).month
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([

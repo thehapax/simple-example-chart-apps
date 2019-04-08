@@ -90,7 +90,7 @@ def update_figure(selected, size_selected):
     layout = go.Layout(
         title=f"Cases vs time",
         xaxis={
-            "title": "Time period"
+            "title": "Date"
         },
         yaxis={
             "title": f"Number of cases",

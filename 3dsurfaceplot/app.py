@@ -60,7 +60,7 @@ def update_figure(selected):
             title=f'Monthly Employment stats for {us.states.lookup(str(selected))}',
             autosize=True,
             height=800,
-            scene={"xaxis": {'title': "Monthly Employed(number)", "tickfont": {"size": 10}, 'type': "linear"},
+            scene={"xaxis": {'title': "Monthly Employed (number)", "tickfont": {"size": 10}, 'type': "linear"},
                    "yaxis": {"title": f"County in {us.states.lookup(str(selected))} ", "tickfont": {"size": 10},
                              "tickangle": 1},
                    "zaxis": {'title': "Employment statistics", "tickfont": {"size": 10}},

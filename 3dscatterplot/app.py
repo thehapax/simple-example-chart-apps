@@ -19,8 +19,7 @@ app.layout = html.Div([
         html.Div(dcc.Dropdown(id="select-xaxis",
                               options=[{'label': i.title(), 'value': i} for i in df.columns[3:]],
                               value='beef',
-
-                              ), className="four columns", style={"display": "block",
+                              ),className="four columns", style={"display": "block",
                                                                   "margin-left": "auto",
                                                                   "margin-right": "auto",
                                                                   "width": "33%"
@@ -28,8 +27,7 @@ app.layout = html.Div([
         html.Div(dcc.Dropdown(id="select-yaxis",
                               options=[{'label': i.title(), 'value': i} for i in df.columns[3:]],
                               value='pork',
-
-                              ), className="four columns", style={"display": "block",
+                              ),className="four columns", style={"display": "block",
                                                                   "margin-left": "auto",
                                                                   "margin-right": "auto",
                                                                   "width": "33%"
@@ -37,19 +35,17 @@ app.layout = html.Div([
         html.Div(dcc.Dropdown(id="select-zaxis",
                               options=[{'label': i.title(), 'value': i} for i in df.columns[3:]],
                               value='poultry',
-
-                              ), className="four columns", style={"display": "block",
+                              ),className="four columns", style={"display": "block",
                                                                   "margin-left": "auto",
                                                                   "margin-right": "auto",
                                                                   "width": "33%"
                                                                   })
 
-    ], className="row",
+    ],className="row",
         style={"padding": 14, "display": "block", "margin-left": "auto", "margin-right": "auto", "width": "80%"}),
     html.Div([dcc.Graph(id="my-graph")])
 
-], className="container")
-
+],className="container")
 
 @app.callback(
     dash.dependencies.Output("my-graph", "figure"),
@@ -88,13 +84,13 @@ def ugdate_figure(selected_x, selected_y, selected_z):
                 "aspectmode": "cube",
 
                 "xaxis": {
-                    "title": f"{selected_x.title()}",
+                    "title": f"{selected_x.title()} (million dollars)",
                 },
                 "yaxis": {
-                    "title": f"{selected_y.title()}",
+                    "title": f"{selected_y.title()} (million dollars)",
                 },
                 "zaxis": {
-                    "title": f"{selected_z.title()}",
+                    "title": f"{selected_z.title()} (million dollars)",
                 }}
 
         )
