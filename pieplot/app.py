@@ -41,7 +41,7 @@ app.layout = html.Div([
         },
     )
     ], style={
-        'textAlign': "center", "margin": "30px", "padding": "10px","width":"55%","margin-left":"auto","margin-right":"auto"}),
+        'textAlign': "center", "margin": "30px", "padding": "10px","width":"65%","margin-left":"auto","margin-right":"auto"}),
 
 ], className="container")
 
