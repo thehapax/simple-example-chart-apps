@@ -35,8 +35,8 @@ app.layout = html.Div([
                                             "width": "100%", "padding": 20}),
 
             html.Div([
-                html.Span("Select Font : ", className="four columns",
-                          style={"width": 100, "text-align": "right", "padding": 5}),
+                html.Span("Select Font Style : ", className="six columns",
+                          style={"width":"50%", "text-align": "right", "padding": 5}),
                 dcc.Dropdown(id="select-font",
                              options=[{'label': i, 'value': i} for i in font],
                              value="Open Sans",
@@ -47,7 +47,7 @@ app.layout = html.Div([
                                  "margin-right": "auto",
                                  "width": "87%"
                              },
-                             className="eight columns"
+                             className="six columns"
                              )], className="row", style={"display": "block",
                                                          "margin-left": "auto",
                                                          "margin-right": "auto",
@@ -55,9 +55,12 @@ app.layout = html.Div([
                                                          "padding": 20
                                                          }),
             html.Div([
-                html.Span("Input Size : ", className="six columns",
-                          style={"width": 100, "text-align": "right", "padding": 5}),
-                dcc.Input(id='size-input', type='number', value=15, className="six columns"),
+                html.Span("Input Font Size : ", className="six columns",
+                          style={"width": "50%", "text-align": "right", "padding": 5}),
+                dcc.Input(id='size-input', type='number', value=15, className="six columns",
+                            style={"margin-left": "auto",
+                                     "margin-right": "auto",
+                                     "width": "45%"}),
 
             ], className="row", style={"display": "block",
                                        "margin-left": "auto",
@@ -104,14 +107,14 @@ app.layout = html.Div([
 def update_figure(selected_type, selected_color, selected_font, size):
     color = selected_color["hex"]
     dropdown = {
-        'NumberOfTime30-59DaysPastDueNotWorse': "Past-due (30-59days)",
+        'NumberOfTime30-59DaysPastDueNotWorse': "Past-due 30-59days (no of days)",
         'DebtRatio': "Debt-ratio",
-        'MonthlyIncome': "Income",
-        'NumberOfOpenCreditLinesAndLoans': "Open Credits/loans",
-        'NumberOfTimes90DaysLate': "Past-due (90 days)",
-        'NumberRealEstateLoansOrLines': "Real estate loans",
-        'NumberOfTime60-89DaysPastDueNotWorse': "Past-due (60-89 days)",
-        'NumberOfDependents': "Dependents"}
+        'MonthlyIncome': "Income (USD)",
+        'NumberOfOpenCreditLinesAndLoans': "Open Credits/loans (number)",
+        'NumberOfTimes90DaysLate': "Past-due 90 days (no of days)",
+        'NumberRealEstateLoansOrLines': "Real estate loans (number)",
+        'NumberOfTime60-89DaysPastDueNotWorse': "Past-due 60-89 days (no of days)",
+        'NumberOfDependents': "Dependents (number)"}
 
     trace = go.Scatter(
         x=df["age"],
@@ -134,7 +137,7 @@ def update_figure(selected_type, selected_color, selected_font, size):
                             "color": color}
                    },
             xaxis={
-                'title': 'Age',
+                'title': 'Age (years)',
                 'titlefont': {'family': selected_font,
                               "size": size,
                               "color": color}},
