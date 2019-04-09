@@ -4,11 +4,9 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv')
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
@@ -18,7 +16,7 @@ app.layout = html.Div([
         "padding-bottom": "30"}),
     html.Div([
         dcc.Dropdown(id="continent-selected",
-                     options=[{'label': i, 'value': i} for i in df['continent'].unique()],
+                     options=[{'label': i, 'value': i} for i in df['continent'].unique()[:4]],
                      value="Asia",
                      style={
                          "display": "block",
@@ -44,17 +42,17 @@ def update_figure(selected):
         x=dff["gdpPercap"],
         y=dff["lifeExp"],
         text=dff["country"],
+        hoverinfo="text",
         mode="markers",
         name=selected,
         marker={
             'size': 10,
             'line': {'width': 0.5, 'color': '#43a2ca'},
             "color": "#7bccc4",
-            'opacity': 0.7,
+
         },
 
     )
-
     return {
         "data": [trace],
         "layout": go.Layout(
@@ -79,14 +77,14 @@ def update_figure(selected):
                     'type': 'circle',
                     'xref': "x",
                     'yref': "y",
-                    'x0': dff["gdpPercap"].quantile(q=0.2),
-                    'y0': dff["lifeExp"].quantile(q=0.2),
-                    'x1': dff["gdpPercap"].quantile(q=0.90),
-                    'y1': dff["lifeExp"].quantile(q=0.90),
-                    'opacity': 0.5,
-                    'fillcolor': '#f0f9e8',
+                    'x0': dff["gdpPercap"].quantile(q=0.25),
+                    'y0': dff["lifeExp"].quantile(q=0.25),
+                    'x1': dff["gdpPercap"].quantile(q=0.75),
+                    'y1': dff["lifeExp"].quantile(q=0.75),
+                    'opacity': 0.6,
+                    'fillcolor': '#cbebe8',
                     'line': {
-                        'color': '#bae4bc',
+                        'color': '#69ded3',
                     },
                 }
 
