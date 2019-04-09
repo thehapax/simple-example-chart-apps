@@ -121,7 +121,7 @@ def update_graph(x_axis, y_axis, legend, position, n_clicks, xvalue, yvalue):
             colorway=["#E20048", "#CEF600", "#FFCB00"],
             legend={"x": xvalue,
                     "y": yvalue,
-                    "orientation": f'{"v" if position == True else "h"} (cm)'},
+                    "orientation": f'{"v" if position == True else "h"}'},
             showlegend=legend
         )
 

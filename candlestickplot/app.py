@@ -49,7 +49,7 @@ def update_figure(selected):
         'layout': go.Layout(
             title=f"Stock Values for the period:{'-'.join(str(i) for i in selected)}",
             xaxis={
-                'title': "Date",
+                
                 'rangeslider': {'visible': False},
                 'autorange': "reversed",
             },

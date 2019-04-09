@@ -12,14 +12,13 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Wage%20Rigidity%20Dataset.csv')
 df.dropna(inplace=True)
 
 df['year'] = pd.DatetimeIndex(df['Date']).year
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([

@@ -84,13 +84,13 @@ def ugdate_figure(selected_x, selected_y, selected_z):
                 "aspectmode": "cube",
 
                 "xaxis": {
-                    "title": f"{selected_x.title()} (million dollars)",
+                    "title": f"{selected_x.title()} (USD)",
                 },
                 "yaxis": {
-                    "title": f"{selected_y.title()} (million dollars)",
+                    "title": f"{selected_y.title()} (USD)",
                 },
                 "zaxis": {
-                    "title": f"{selected_z.title()} (million dollars)",
+                    "title": f"{selected_z.title()} (USD)",
                 }}
 
         )
