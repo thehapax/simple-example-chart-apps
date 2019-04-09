@@ -15,6 +15,7 @@ app.layout = html.Div([
         'textAlign': "center",
         "padding-bottom": "30"}),
     html.Div([
+        html.Span("Metric to display : ",className="six columns",style={"text-align":"right","width":"40%","padding-top":10}),
         dcc.Dropdown(id="value-selected",
                      options=[{'label': "Population ", 'value': 'pop'},
                               {'label': "GDP Per Capita ", 'value': 'gdpPercap'},
@@ -26,9 +27,9 @@ app.layout = html.Div([
                          "margin-right": "auto",
                          "width": "70%"
 
-                     }
+                     },className="six columns"
                      )
-    ]),
+    ],className="row"),
     dcc.Graph(id="my-graph")
 
 ], className="container")

@@ -5,7 +5,6 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Emissions%20Data.csv')
 
 app = dash.Dash(__name__)
@@ -53,11 +52,11 @@ def update_figure(selected):
 
         "data": traces,
         "layout": go.Layout(
-            title=f"Emission Levels for {'-'.join(str(i)for i in selected)}",
+            title=f"Emission Levels for {'-'.join(str(i) for i in selected)}",
             autosize=True,
             margin={"l": 200, "b": 100, "r": 200},
             xaxis={
-                "showticklabels":False,
+                "showticklabels": False,
             },
             yaxis={
                 "title": f"Emissions (gigatonnes of CO2)",
