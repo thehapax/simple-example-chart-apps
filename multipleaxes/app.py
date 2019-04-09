@@ -73,11 +73,11 @@ def update_figure(selected_1, selected_2):
             xaxis={
                 "title": "Date"
             },
-            yaxis={'title': f'Rainfall (mm) for {selected_1}',
+            yaxis={'title': f'Rainfall  (mm)  for {selected_1}',
 
                    "range": [0, 300]
                    },
-            yaxis2={'title': f'Rainfall (mm) for {selected_2}',
+            yaxis2={'title': f'Rainfall  (mm)  for {selected_2}',
                     'overlaying': 'y',
                     'side': 'right',
                     "range": [0, 300],
