@@ -56,6 +56,9 @@ def update_figure(selected):
             title=f"Emission Levels for {'-'.join(str(i)for i in selected)}",
             autosize=True,
             margin={"l": 200, "b": 100, "r": 200},
+            xaxis={
+                "showticklabels":False,
+            },
             yaxis={
                 "title": f"Emissions (gigatonnes of CO2)",
                 "type": "log",
