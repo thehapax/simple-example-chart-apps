@@ -70,7 +70,7 @@ def update_scatter(selected, hoverdata):
         ))
 
     layout = go.Layout(
-        title=f"Passenger fare vs Age",
+        title=f"Passenger Fare vs Age",
         colorway=['#fa9fb5', '#c51b8a'],
         hovermode='closest',
         xaxis={
@@ -82,7 +82,7 @@ def update_scatter(selected, hoverdata):
 
         },
         yaxis={
-            "title": "Passenger fare (£)",
+            "title": "Passenger Fare (£)",
             "range": [-15, 300],
             "tick0": 0,
             "dtick": 25,
