@@ -32,7 +32,7 @@ app.layout = html.Div([
                       value="Auckland",
 
                   )], style={'width': '48%', "float": "left"}),
-        html.Div([html.Span("Choose Color-Scale"),
+        html.Div([html.Span("Choose Colorscale"),
                   dcc.Dropdown(
                       id="selected-color",
                       options=[{
@@ -68,7 +68,7 @@ def update_figure(selected, selected_color):
                     "titleside": 'top',
                     "tickmode": 'array',
                     "tickvals": [0, 125, 250],
-                    "ticktext": ['light', 'Moderate', 'Heavy'],
+                    "ticktext": ['Light', 'Moderate', 'Heavy'],
                     "ticks": 'outside'
                 }
                 },
@@ -93,8 +93,8 @@ def update_figure(selected, selected_color):
                 "showline": True
             },
             font={"color": "#ffffff"},
-            paper_bgcolor="#1C0707",
-            plot_bgcolor="#1C0707"
+            paper_bgcolor="#000000",
+            plot_bgcolor="#000000"
         )
 
     }
