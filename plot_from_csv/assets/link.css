@@ -13,6 +13,10 @@
 
 }
 
+.row a:hover{
+    color: #8e2138;
+}
+
 .Select--multi .Select-value{
     color: #8e2138;
     background-color:#F9ECEF;
