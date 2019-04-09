@@ -38,6 +38,7 @@ app.layout = html.Div([
     [Input("selected-type", "value")])
 def update_figure(selected):
     dff = df[df["Indicator Name"] == selected]
+
     trace = go.Heatmap(
         x=dff.columns.values[3:],
         y=dff['Country Name'].unique(),
@@ -53,7 +54,7 @@ def update_figure(selected):
         "layout": go.Layout(
             width=800,
             height=750,
-            title=f"Energy Indicators vs Year",
+            title=f"{selected.title()} vs Year",
             xaxis={
                 "title": "Year"
             },
