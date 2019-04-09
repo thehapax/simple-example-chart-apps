@@ -78,13 +78,13 @@ app.layout = html.Div([
                     html.Div(dcc.Dropdown(
                         id="selected-type",
                         options=[
-                            {'label': "Past-due(30-59days)", 'value': 'NumberOfTime30-59DaysPastDueNotWorse'},
+                            {'label': "Past-due ( 30-59days )", 'value': 'NumberOfTime30-59DaysPastDueNotWorse'},
                             {'label': "Debt-ratio", 'value': 'DebtRatio'},
                             {'label': "Income", 'value': 'MonthlyIncome'},
                             {'label': "Open Credits/loans", 'value': 'NumberOfOpenCreditLinesAndLoans'},
-                            {'label': "Past-due(90 days)", 'value': 'NumberOfTimes90DaysLate'},
+                            {'label': "Past-due ( 90 days )", 'value': 'NumberOfTimes90DaysLate'},
                             {'label': "Real estate loans", 'value': 'NumberRealEstateLoansOrLines'},
-                            {'label': "Past-due(60-89 days)", 'value': 'NumberOfTime60-89DaysPastDueNotWorse'},
+                            {'label': "Past-due ( 60-89 days )", 'value': 'NumberOfTime60-89DaysPastDueNotWorse'},
                             {'label': "Dependents", 'value': 'NumberOfDependents'}
                         ],
                         value='MonthlyIncome',
