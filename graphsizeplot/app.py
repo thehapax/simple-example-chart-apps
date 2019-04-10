@@ -45,14 +45,17 @@ app.layout = html.Div([
             "margin-right": "auto",
             "width": "100%"
         })]),
-    html.Div(
+    html.Div([
+        html.Span("Slide to change graphsize", style={"text-align": "center", 'padding': 10}, className="row"),
         dcc.Slider(
             id="graph-size",
-            min=300,
+            min=200,
             max=900,
             value=450,
-            step=100,
+            step=5,
+            updatemode="drag",
             marks={
+                200: "200px",
                 300: "300px",
                 400: "400px",
                 500: "500px",
@@ -61,13 +64,15 @@ app.layout = html.Div([
                 800: "800px",
                 900: "900px",
 
-            }
-        ), style={
-            "display": "block",
-            "margin-left": "auto",
-            "margin-right": "auto",
-            "width": "40%"
-        }
+            },
+            className="row"
+        )], style={
+        "display": "block",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "width": "40%",
+        "padding": 20
+    }
     )
 
 ], className="container")
@@ -84,6 +89,10 @@ def update_figure(selected, size_selected):
             x=df[df['Indicator'] == select]['Time Period'],
             y=df[df['Indicator'] == select]['Data Value'],
             mode='lines+markers',
+            name=select,
+            hoverinfo="name",
+            hoverlabel={
+                "namelength": 50},
             marker={"size": 6, },
             showlegend=False
         ))
