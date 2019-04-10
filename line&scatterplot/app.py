@@ -22,7 +22,7 @@ app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
-        html.H1("Employment wage rigidity"),
+        html.H1("Employment Wage Rigidity"),
 
     ], style={"text-align": "center"}),
     html.Div(
@@ -119,7 +119,7 @@ def update_figure(selected_year):
                 "tickangle": 45,
             },
             yaxis={
-                "title": "% of Jobstayers with a wage change of zero",
+                "title": "% of Jobstayers With a Wage Change of Zero",
                 "range": [0, 25],
                 "tick0": 0,
                 "dtick": 5,
