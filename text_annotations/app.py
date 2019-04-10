@@ -5,7 +5,6 @@ Created on Fri Feb  1 14:24:07 2019
 
 @author: divyachandran
 """
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -13,13 +12,15 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output, State
 
-
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/styled-line.csv')
 app = dash.Dash(__name__)
 
+month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
+         'December']
+
 app.layout = html.Div([
     html.Div([
-        html.H1("Temperatures in New York")
+        html.H1("Monthly Temperature Highs and Lows")
     ], style={'textAlign': "center"}),
     html.Div([
         html.Div([dcc.Dropdown(
@@ -29,8 +30,8 @@ app.layout = html.Div([
             multi=True
 
         )
-        ],style={
-            "display":"block",
+        ], style={
+            "display": "block",
             "margin-left": "auto",
             "margin-right": "auto",
             "width": "60%"
@@ -40,46 +41,43 @@ app.layout = html.Div([
 
     dcc.Graph(id="my-graph"),
     html.Div([
-                dcc.RadioItems(
-                    id="select-text",
-                    options=[
-                        {'label': 'Add annotations', 'value': 1},
-                        {'label': 'Remove annotations', 'value': 0}
-                    ],
-                    value=1,
-                    labelStyle={'display': 'inline-block', "padding": 30})
-            ],style={"display": "block",
-              "margin-left": "auto",
-              "margin-right": "auto",
-              "width": "60%"}),
 
-    html.Div([
-        dcc.Input(id='x-input', type='text', placeholder="Input month", value=''),
-        dcc.Input(id='y-input', type='number', placeholder="Input temperature", value=''),
-        dcc.Input(id='text-input', type='text', placeholder="Input text", value=''),
-        html.Button(id='submit-button', children="Type text/position & Submit"),
+        html.H6("Text-Annotations", className="row",
+                style={"display": "block", "text-align": "center", "text-decoration": "underline"}),
 
-    ], style={"display": "block",
-              "margin-left": "auto",
-              "margin-right": "auto",
-              "width": "100%",
-              }),
+        html.Div([
+            dcc.Dropdown(id='x-input', options=[{"label": i, "value": i} for i in month],
+                         placeholder="Select month",
+                         value='', className="three columns"),
+            dcc.Input(id='y-input', type='number', placeholder="Input temperature", value='',
+                      className="three columns"),
+            dcc.Input(id='text-input', type='text', placeholder="Input text", value='', className="two columns"),
+            html.Button(id='submit-button', children="Submit", className="two columns"),
+            html.Button(id='remove-button', children="Remove All", className="two columns"),
+
+        ], className="row", style={"display": "block",
+                                   "margin-left": "auto",
+                                   "margin-right": "auto",
+                                   "width": "100%",
+                                   }),
+
+    ])
 ], className="container")
 
 
 @app.callback(
     Output("my-graph", "figure"),
     [Input("value-selected", "value"),
-     Input("select-text", "value"),
+     Input("remove-button", 'n_clicks'),
      Input('submit-button', 'n_clicks')],
     [State('x-input', 'value'),
      State('y-input', 'value'),
      State('text-input', 'value')]
 
 )
-def update_graph(selected, add_text, n_clicks, x_value, y_value, text):
-    dropdown ={
-        "High 2014" : "High Temperature in 2014",
+def update_graph(selected, remove, n_clicks, x_value, y_value, text):
+    dropdown = {
+        "High 2014": "High Temperature in 2014",
         "Low 2014": "Low Temperature in 2014",
         "High 2007": "High Temperature in 2007",
         "Low 2007": "Low Temperature in 2007",
@@ -87,7 +85,7 @@ def update_graph(selected, add_text, n_clicks, x_value, y_value, text):
         "Low 2000": "Low Temperature in 2000"
     }
 
-
+    ctx = dash.callback_context
     trace = []
     for value in selected:
         trace.append(go.Scatter(
@@ -115,7 +113,7 @@ def update_graph(selected, add_text, n_clicks, x_value, y_value, text):
         "data": trace,
         "layout": layout}
 
-    if add_text == 1:
+    if ctx.triggered[0]['prop_id'].split('.')[0] == 'submit-button':
         layout.update({
             "annotations": [
                 {'x': x_value.title(),
@@ -138,5 +136,3 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-
