@@ -17,7 +17,7 @@ app.layout = html.Div([
     html.Div([
         dcc.Dropdown(
             id='value-selected',
-            options=[{'label': i, 'value': i} for i in df.columns.values[2:9]],
+            options=[{'label': str(i).replace('-', ' '), 'value': i} for i in df.columns.values[2:9]],
             value=["Number-transactions"],
             multi=True,
             style={
@@ -29,7 +29,7 @@ app.layout = html.Div([
             },
 
             className="eight columns"),
-        html.A("Click Here to view the dataset",
+        html.A("View the CSV dataset",
                href="https://raw.githubusercontent.com/plotly/datasets/master/Mining-BTC-180.csv",
                target="_blank", style={"width": "30%", "float": "right"}, className="four columns")
     ], className="row"),
@@ -65,6 +65,10 @@ app.layout = html.Div([
 def update_graph(selected1, selected2):
     dff = df[(df["month"] >= selected1[0]) & (df["month"] <= selected1[1])]
 
+    new_list = []
+    for i in selected2:
+        new_list.append((str(i).replace('-', ' ')))
+
     trace = []
     for indicator in selected2:
         trace.append(go.Scatter(
@@ -81,12 +85,12 @@ def update_graph(selected1, selected2):
     return {
         "data": trace,
         "layout": go.Layout(
-            title=f"{','.join((str(i).replace('-', ' ')) for i in selected2)} vs Date",
+            title=f"{','.join(new_list[0:-1])} and {''.join(new_list[-1])} vs Date",
             xaxis={
                 "title": "Date"
             },
             yaxis={
-                "title": f"Statistics"
+                "title": f"Value"
             },
             colorway=["#C7037A", "#E20048", "#FFCB00", "#FF7C00", "#2F9609", "#0E4770", "#A8AE0B"],
 

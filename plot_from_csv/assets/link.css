@@ -21,14 +21,10 @@
     color: #8e2138;
     background-color:#F9ECEF;
 }
-.rc-slider-rail{
-    background-color:#F9ECEF;
+.rc-slider-track{
+    background-color:#8e2138;
 }
 
-.rc-slider-step {
-    background-color: #8e2138;
-
-}
 .rc-slider-dot-active,.rc-slider-handle {
     border: 2px solid #8e2138;
 }
