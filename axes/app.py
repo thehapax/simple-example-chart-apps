@@ -12,8 +12,7 @@ import dash_daq as daq
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
-from dash.dependencies import Input, Output, State
-
+from dash.dependencies import Input, Output
 
 df = pd.read_csv("https://raw.githubusercontent.com/divyachandran-ds/Datascience/master/bchealth.csv")
 
@@ -24,19 +23,18 @@ font = ["Arial", "Open Sans", "Balto", "Courier New", "PT Sans Narrow", "Times N
 
 app.layout = html.Div([
     html.Div([
-        html.H1("British Columbia Health")], style={"text-align": "center"}),
+        html.H1("British Columbia Healthcare Data")], style={"text-align": "center"}),
     html.Div([
         html.Div([
             html.P("Toggling Axes Lines, Ticks, Labels", className="row",
-                   style={"text-align": "center", "text-decoration": "underline"}),
+                   style={"text-align": "center", "border": "1px solid #ccc"}),
             html.Div([
                 html.Span("Grid-Lines", className="four columns", style={"text-align": "right"}),
                 html.Div(
                     daq.BooleanSwitch(
                         id='grid-type',
-                        label='Hide______Show',
+                        label=['Hide', 'Show'],
                         labelPosition="bottom",
-                        color="#2b7b26",
                         on=True,
                     ), className="eight columns"
                 )
@@ -46,9 +44,8 @@ app.layout = html.Div([
                 html.Div(
                     daq.BooleanSwitch(
                         id='label-type',
-                        label='Hide______Show',
+                        label=['Hide', 'Show'],
                         labelPosition="bottom",
-                        color="#2b7b26",
                         on=True,
                     ), className="eight columns"
                 )
@@ -58,53 +55,76 @@ app.layout = html.Div([
                 html.Div(
                     daq.BooleanSwitch(
                         id='line-type',
-                        label='Hide______Show',
+                        label=['Hide', 'Show'],
                         labelPosition="bottom",
-                        color="#2b7b26",
                         on=True,
                     ), className="eight columns"
                 )
             ], className="row", style={"padding": 5}),
-        ], className="row", style={"border-bottom": "1px solid #979797"}),
+        ], className="row"),
         html.Div([
-            html.Span("Range of Y-Axes", className="column",
-                      style={"text-align": "center", "text-decoration": "underline"}),
-            html.Div([dcc.RangeSlider(id='range',
+            html.Span("Expenses: y-axis range ", className="column",
+                      style={"text-align": "center", "border": "1px solid #ccc"}),
+            html.Div([dcc.RangeSlider(id='range1',
                                       min=0,
-                                      max=100,
-                                      value=[0, 50],
-                                      marks={i * 10: i * 10 for i in range(0, 11)}),
+                                      max=100000000,
+                                      step=500,
+                                      updatemode="drag",
+                                      value=[0, 20000000],
+                                      marks={10000000: "10M",
+                                             20000000: "20M",
+                                             30000000: "30M",
+                                             40000000: "40M",
+                                             50000000: "50M",
+                                             60000000: "60M",
+                                             70000000: "70M",
+                                             80000000: "80M",
+                                             90000000: "90M",
+                                             100000000: "100M"
+                                             })
                       ], className="column", style={"margin": 0, "padding": 10})
-        ], className="row", style={"border-bottom": "1px solid #979797", "padding": 15}),
+        ], className="row", style={"padding": 15}),
+        html.Div([
+            html.Span("Number of Practitioners: y-axis range ", className="column",
+                      style={"text-align": "center", "border": "1px solid #ccc"}),
+            html.Div([dcc.RangeSlider(id='range2',
+                                      min=0,
+                                      max=500,
+                                      step=10,
+                                      updatemode="drag",
+                                      value=[0, 50],
+                                      marks={i * 50: i * 50 for i in range(0, 11)}),
+                      ], className="column", style={"margin": 0, "padding": 10})
+        ], className="row", style={"padding": 15}),
 
         html.Div([
             html.Div([
-                html.P("Tick : Color and Style (all axes)", className="row",
-                       style={"text-align": "center", "text-decoration": "underline"}),
+                html.P("Tick : Color and Style", className="row",
+                       style={"text-align": "center", "border": "1px solid #ccc"}),
 
                 html.Div([
                     html.Div(
                         daq.ColorPicker(
                             id='tick-color-picker',
-                            label='Tick color',
+                            label='Tick Color',
                             size=150,
                             value={"hex": "#CFD0E0"},
                         )
                     )
                 ], className="row"),
                 html.Div([
-                    html.Span("Tick Size: Input length & width", className="row", style={"text-align": "center"}),
-                    html.Div([dcc.Input(id='length', type='number', value=10, style={"width": "25%"}),
-                              dcc.Input(id='width', type='number', value=10, style={"width": "25%"}),
-                              html.Button('Submit', id='size-button', style={"width": "40%", "padding": 1})
+                    html.P("Tick Size: Length & Width", className="row",
+                           style={"text-align": "center", "border": "1px solid #ccc"}),
+                    html.Div([dcc.Input(id='length', type='number', value=10, className="six columns"),
+                              dcc.Input(id='width', type='number', value=10, className="six columns"),
                               ], className="row", style={"padding": 3})
                 ], className="row", style={"padding-top": 15, "padding-bottom": 15}),
             ], className="six columns",
-                style={"width": "48%", "margin": 0, "float": "left", "border-right": "1px solid #979797"}),
+                style={"width": "48%", "margin": 0, "float": "left", "padding": 3}),
 
             html.Div([
                 html.P("Axes : Color and Style", className="row",
-                       style={"text-align": "center", "text-decoration": "underline"}),
+                       style={"text-align": "center", "border": "1px solid #ccc"}),
                 html.Div([
                     html.Div(
                         daq.ColorPicker(
@@ -116,23 +136,23 @@ app.layout = html.Div([
                     )
                 ], className="row"),
                 html.Div([
-                    html.Span("Axes Font", className="row", style={"text-align": "center"}),
+                    html.P("Axes Font", className="row", style={"text-align": "center", "border": "1px solid #ccc"}),
                     html.Div(
                         dcc.Dropdown(id="axes-font",
                                      options=[{'label': i, 'value': i} for i in font],
                                      value="Open Sans",
-                                     placeholder="Select a font", ), className="row"
+                                     placeholder="Select a font", style={"padding-top": 3}), className="row"
                     )
                 ], className="row", style={"padding-top": 15, "padding-bottom": 15, "padding-left": 10}),
 
-            ], className="six columns", style={"width": "48%", "margin": 0, "float": "left"}),
+            ], className="six columns", style={"width": "48%", "margin": 0, "float": "left", "padding": 3}),
 
         ], className="row", style={"padding": 5})
 
-    ], className="five columns", style={"border": "1px solid #979797", "width": "48%", "margin": 0, "float": "left"}),
+    ], className="five columns", style={"width": "48%", "margin": 0, "float": "left"}),
 
     html.Div([
-        html.Span("Health Service Delivery Areas", className="row", style={"text-align": "center"}),
+        html.Span("Health Service Delivery Area", className="row", style={"text-align": "center"}),
         dcc.Dropdown(id="select-hsda",
                      options=[{'label': 'East Kootenay', 'value': '11 - East Kootenay'},
                               {'label': 'Kootenay/Boundary', 'value': '12 - Kootenay/Boundary'},
@@ -162,16 +182,16 @@ app.layout = html.Div([
     [Input('grid-type', 'on'),
      Input('label-type', 'on'),
      Input('line-type', 'on'),
-     Input("range", 'value'),
+     Input("range1", 'value'),
+     Input("range2", 'value'),
      Input('tick-color-picker', 'value'),
      Input('axes-color-picker', 'value'),
      Input('axes-font', 'value'),
      Input('select-hsda', 'value'),
-     Input('size-button', 'n_clicks')],
-    [State('length', 'value'),
-     State('width', 'value'),
+     Input('length', 'value'),
+     Input('width', 'value'),
      ])
-def update_figure(grid, label, line, range, tick_color, axes_color, axes_font, selected, n_clicks, len, width):
+def update_figure(grid, label, line, range1, range2, tick_color, axes_color, axes_font, selected, len, width):
     color1 = tick_color["hex"]
     color2 = axes_color["hex"]
     dff = df[df["HSDA"] == selected]
@@ -206,8 +226,9 @@ def update_figure(grid, label, line, range, tick_color, axes_color, axes_font, s
     )
     layout = go.Layout(
         title="Expenditure & Number of Practitioners vs Speciality",
-        showlegend=False,
         height=600,
+
+        legend={"y": 1.1, "orientation": "h"},
         xaxis={
             "showgrid": grid,
             "showline": line,
@@ -230,9 +251,9 @@ def update_figure(grid, label, line, range, tick_color, axes_color, axes_font, s
         yaxis={
             "showgrid": grid,
             "showline": line,
-            "showticklabels":label,
+            "showticklabels": label,
             "tickcolor": color1,
-            "range": [range[0] + 1000, range[1] * 100000],
+            "range": [range1[0], range1[1]],
             "ticklen": len,
             "tickwidth": width,
             "title": {
@@ -244,9 +265,9 @@ def update_figure(grid, label, line, range, tick_color, axes_color, axes_font, s
         yaxis2={
             "showgrid": grid,
             "showline": line,
-            "showticklabels":label,
+            "showticklabels": label,
             "tickcolor": color1,
-            "range": [range[0], range[1]],
+            "range": [range2[0], range2[1]],
             "ticklen": len,
             "tickwidth": width,
             "title": {
