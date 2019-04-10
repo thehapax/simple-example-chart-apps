@@ -9,7 +9,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/laucn
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    html.Div([html.H1("Employment Statistics")], style={
+    html.Div([html.H1("Employment Statistics in the United States")], style={
         'textAlign': "center",
     }),
     html.Div([
@@ -57,13 +57,14 @@ def update_figure(selected):
     fig = go.Figure(
         data=trace,
         layout=go.Layout(
-            title=f'Monthly Employment stats for {us.states.lookup(str(selected))}',
+            title=f'Annual Average of Labor Force Data for {us.states.lookup(str(selected))}',
             autosize=True,
             height=800,
-            scene={"xaxis": {'title': "Monthly Employed (number)", "tickfont": {"size": 10}, 'type': "linear"},
+            scene={"xaxis": {'title': "Annual Average of Employed  (number)", "tickfont": {"size": 10}, 'type': "linear"},
                    "yaxis": {"title": f"County in {us.states.lookup(str(selected))} ", "tickfont": {"size": 10},
                              "tickangle": 1},
-                   "zaxis": {'title': "Employment statistics", "tickfont": {"size": 10}},
+                   "zaxis": {'title': "         Annual Average of : <br>Labour Force,Employed,Unemployed  ",
+                             "tickfont": {"size": 10}},
                    "camera": {"eye": {"x": 2, "y": 1, "z": 1.25}},
                    "aspectmode": "cube",
                    }
