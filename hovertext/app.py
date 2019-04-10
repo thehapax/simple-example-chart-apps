@@ -37,14 +37,14 @@ app.layout = html.Div([
     ], className="row", style={"margin": 20, "padding": 30}),
     html.Div([
         html.Span("Hover Text & Formatting", className="row",
-                  style={"text-align": "center", "text-decoration": "underline", "display": "block", "padding": 20}),
-        html.A(" https://github.com/d3/d3-format/blob/master/README.md#locale_format", className="row",
-               style={"text-align": "center", "display": "block", "padding": 20}),
+                  style={"text-align": "center", "width": "40%", "margin-left": "auto", "margin-right": "auto",
+                         "border": "1px solid black", "display": "block", "padding": 3}),
         html.Div([
             html.Div([
                 html.Span("Hover Text", className="six columns", style={"text-align": "right", "display": "block"}),
                 html.Div([daq.BooleanSwitch(id="hover-text", on=True)], className="six columns")
-            ], className="four columns", style={"width": "25%"}),
+            ], className="five columns",
+                style={"width": "30%", "padding-top": 10, "display": "block", "text-align": "right"}),
             html.Div([
                 html.Span("Select Hover Format", className="six columns",
                           style={"text-align": "right", "display": "block", "padding": 10}),
@@ -57,9 +57,9 @@ app.layout = html.Div([
                              value='.2f',
                              className="six columns"
                              )
-            ], className="eight columns", style={"width": "65%", "margin": 0})
-        ], className="row")
-    ], className="row", style={"margin": 3, "padding": 5, "border": "1px solid black"})
+            ], className="seven columns", style={"width": "65%", "margin": 0})
+        ], className="row", style={"padding": 10, "width": "70%", "margin-left": "auto", "margin-right": "auto"})
+    ], className="row", style={"margin": 3, "padding": 5})
 
 ], className="container")
 
