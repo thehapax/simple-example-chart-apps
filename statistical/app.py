@@ -196,5 +196,3 @@ server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-# TODO: dist plot,city vs product(sum), histogram(product),boxplot(age gp, purchase),error bar(occu,purchase),violin(resident, purchase(M/F))
