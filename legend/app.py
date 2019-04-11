@@ -46,40 +46,37 @@ app.layout = html.Div([
         dcc.Graph(id="my-graph"),
     ], className="row"),
     html.Div([
-        html.Div([
-            html.Div([
-                html.Span("Legend Visible", className="six columns",
-                          style={'textAlign': "right", "text-decoration": "underline"}),
-                daq.BooleanSwitch(id="legend",
-                                  on=True,
-                                  label="Hide _________ Show",
-                                  labelPosition="bottom",
-                                  color="#137d1c",
-                                  className="six columns"
-                                  ),
-            ], className="six columns"),
+        html.Span("Legend Visible :  ", className="three columns",
+                  style={'textAlign': "center", "padding-top": 2, "padding-right": 2}),
+        daq.BooleanSwitch(id="legend",
+                          on=True,
+                          label=["Hide", "Show"],
+                          labelPosition="top",
+                          color="#137d1c",
+                          className="two columns"
+                          ),
 
-            html.Div([
-                html.Span("Legend Orientation", className="six columns",
-                          style={'textAlign': "right", "text-decoration": "underline"}),
-                daq.ToggleSwitch(id="position",
-                                 value=True,
-                                 label="Horizontal_________Vertical",
-                                 labelPosition="bottom",
-                                 className="six columns"
-                                 )
-            ], className="six columns")
-        ])
-    ], className="row", style={"padding": 10, "border": ".5px solid black"}),
+        html.Span("Legend Orientation :", className="four columns",
+                  style={'textAlign': "center", "padding-top": 2, "padding-right": 2}),
+        daq.ToggleSwitch(id="position",
+                         value=True,
+                         label=["Horizontal", "Vertical"],
+                         labelPosition="top",
+                         className="three columns"
+                         )
+    ], className="row", style={"padding-top": 10,
+                               "margin-left": "auto", "margin-right": "auto", "width": "80%"}),
 
     html.Div([
-        html.Span("Legend Position:Input X and Y values", className="row",
-                  style={'textAlign': "center", "padding": 20, "margin": 5, "text-decoration": "underline"}),
-        dcc.Input(id="x-value", type="number", value=1),
-        dcc.Input(id="y-value", type="number", value=1),
-        html.Button('Submit', id="button")
-    ], className="row",
-        style={"margin-left": "auto", "margin-right": "auto", "display": "block", "width": "60%", "padding": 20}),
+        html.P("Legend Position:Input x and y values", className="row",
+               style={'textAlign': "center", "padding": 5,
+                      "margin-left": "auto", "margin-right": "auto", "width": "40%", "border": ".5px solid #ccc"}),
+        html.Div([
+            dcc.Input(id="x-value", type="number", value=1, style={"width": "30%"}, className="four columns"),
+            dcc.Input(id="y-value", type="number", value=1, style={"width": "30%"}, className="four columns"),
+            html.Button('Submit', id="button", className="four columns")
+        ], className="row", style={"margin-left": "auto", "margin-right": "auto", "width": "60%"})
+    ], style={"padding-top": 30}),
 
 ], className="container")
 
