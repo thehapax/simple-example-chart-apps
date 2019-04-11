@@ -53,7 +53,7 @@ app.layout = html.Div([
                       className="three columns"),
             dcc.Input(id='text-input', type='text', placeholder="Input text", value='', className="two columns"),
             html.Button(id='submit-button', children="Submit", className="two columns"),
-            html.Button(id='remove-button', children="Remove All", className="two columns"),
+            html.Button(id='remove-button', children="Remove", className="two columns"),
 
         ], className="row", style={"display": "block",
                                    "margin-left": "auto",
