@@ -47,7 +47,7 @@ app.layout = html.Div([
     ], className="row"),
     html.Div([
         html.Span("Legend Visible :  ", className="three columns",
-                  style={'textAlign': "center", "padding-top": 2, "padding-right": 2}),
+                  style={'textAlign': "left", "padding-top": 2}),
         daq.BooleanSwitch(id="legend",
                           on=True,
                           label=["Hide", "Show"],
@@ -57,7 +57,7 @@ app.layout = html.Div([
                           ),
 
         html.Span("Legend Orientation :", className="four columns",
-                  style={'textAlign': "center", "padding-top": 2, "padding-right": 2}),
+                  style={'textAlign': "left", "padding-top": 2}),
         daq.ToggleSwitch(id="position",
                          value=True,
                          label=["Horizontal", "Vertical"],
