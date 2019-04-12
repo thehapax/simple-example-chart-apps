@@ -21,10 +21,12 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div([
     html.Div([
         html.H1("Basic Charts")
-    ], className="row", style={'textAlign': "center"}),
+    ], className="row", style={'textAlign': "center", "border": "1px solid black", "padding": 5,
+                               "margin-left": "auto", "margin-right": "auto", "width": "60%"}),
     html.Div([
         html.Div([
-            html.Span("Axes for plots", style={'textAlign': "center", "display": "block"}),
+            html.Span("X-Axis : Scatter,Horizontal Barplot,Filledarea,Table",
+                      style={'textAlign': "center", "display": "block"}),
             dcc.Dropdown(
                 id='xaxis-selected',
                 options=[{"label": i, 'value': i} for i in df.columns[0:8]],
@@ -32,18 +34,18 @@ app.layout = html.Div([
             )
         ], className="six columns"),
         html.Div([
-            html.Span("Axes for plots", style={'textAlign': "center", "display": "block"}),
+            html.Span("Y-Axis : Scatter,Line,Barplot,Table", style={'textAlign': "center", "display": "block"}),
             dcc.Dropdown(
                 id='yaxis-selected',
                 options=[{"label": i, 'value': i} for i in df.columns[0:8]],
                 value='Glucose',
             )
         ], className="six columns"),
-    ], className="row", style={"padding": 10}),
+    ], className="row", style={"padding": 20}),
 
     html.Div([
         dcc.Graph(id="my-graph"),
-    ], className="row", style={"border": "1px solid black", "padding": 20}),
+    ], className="row", style={"padding": 30}),
     html.Div([
         html.Span("Type Of Plot", style={'textAlign': "center", "display": "block"}),
         dcc.Dropdown(
@@ -69,6 +71,16 @@ app.layout = html.Div([
 
 )
 def update_graph(x_axis, y_axis, plot):
+    text = {'Pregnancies': "Pregnancies",
+            'Glucose': "Glucose (mmol/L)",
+            'BloodPressure': "Blood Pressure (mm Hg) ",
+            'SkinThickness': "Skin Thickness (mm) ",
+            'Insulin': "Insulin (mu U/ml) ",
+            'BMI': "BMI (weight in kg/(height in m)^2) ",
+            'DiabetesPedigreeFunction': "Diabetes Pedigree Function",
+            'Age': "Age (years) ",
+            'Outcome': "Outcome"}
+
     trace1 = go.Scatter(
         x=df[x_axis],
         y=df[y_axis],
@@ -80,12 +92,12 @@ def update_graph(x_axis, y_axis, plot):
         },
     )
     layout1 = go.Layout(title=f"{plot}",
-                        xaxis={"title": f"{x_axis}"},
-                        yaxis={"title": f"{y_axis}"}
+                        xaxis={"title": f"{text[x_axis]}"},
+                        yaxis={"title": f"{text[y_axis]}"}
                         )
     trace2 = go.Scatter(
         x=df["Age"].sort_values(ascending=True),
-        y=df[x_axis],
+        y=df[y_axis],
         mode="lines",
         marker={
             "color": "#0B660B",
@@ -95,19 +107,19 @@ def update_graph(x_axis, y_axis, plot):
         },
     )
     layout2 = go.Layout(title=f"{plot}",
-                        xaxis={"title": "Age"},
-                        yaxis={"title": f"{x_axis}"}
+                        xaxis={"title": "Age (years)"},
+                        yaxis={"title": f"{text[y_axis]}"}
                         )
     trace3 = go.Bar(
         x=df["Outcome"].unique(),
-        y=df[x_axis],
+        y=df[y_axis],
         width=0.3,
         marker={
             "color": "#660B3E"}
     )
     layout3 = go.Layout(title=f"{plot}",
                         xaxis={"title": "Diabetes Outcome"},
-                        yaxis={"title": f"{x_axis}"}
+                        yaxis={"title": f"{text[y_axis]}"}
                         )
     trace4 = go.Bar(
         x=df[x_axis],
@@ -118,7 +130,7 @@ def update_graph(x_axis, y_axis, plot):
         width=0.3,
     )
     layout4 = go.Layout(title=f"{plot}",
-                        xaxis={"title": f"{x_axis}"},
+                        xaxis={"title": f"{text[x_axis]}"},
                         yaxis={"title": f"Diabetes Outcome"}
                         )
     list = []
@@ -151,8 +163,8 @@ def update_graph(x_axis, y_axis, plot):
         fillcolor="#FF6BBF"
     )
     layout7 = go.Layout(title=f"{plot}",
-                        xaxis={"title": "Age"},
-                        yaxis={"title": f"{x_axis}"}
+                        xaxis={"title": "Age (years)"},
+                        yaxis={"title": f"{text[x_axis]}"}
                         )
 
     if plot == "Scatter Plot":
