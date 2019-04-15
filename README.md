@@ -48,17 +48,41 @@ https://dash-simple-apps.plotly.host/dash-boxplot/
 15. Choropleth:
 https://dash-simple-apps.plotly.host/dash-choroplethplot/
 
-16. Line & Scatter plot:
+16. Line-&-Scatter-plot:
 https://dash-simple-apps.plotly.host/dash-linescatterplot/
 
 17. Heatmap:
 https://dash-simple-apps.plotly.host/dash-heatmapplot/
 
-18. Plot from Csv:
+18. Plot-from-CSV:
 https://dash-simple-apps.plotly.host/dash-plotfromcsvplot/
 
-19. Graphsize plot:
+19. Graphsize-plot:
 https://dash-simple-apps.plotly.host/dash-graphsizeplot/
 
-20. Axes plot:
+20. Axes-plot:
 https://dash-simple-apps.plotly.host/dash-axesplot/
+
+21. Line-plot:
+https://dash-simple-apps.plotly.host/dash-lineplot/
+
+22. Basic-charts:
+https://dash-simple-apps.plotly.host/dash-basicplot/
+
+23. Legends:
+https://dash-simple-apps.plotly.host/dash-legend/
+
+24. Maps:
+https://dash-simple-apps.plotly.host/dash-mapplot/
+
+25. 3D-Scatter-plot:
+https://dash-simple-apps.plotly.host/dash-3dscatterplot/
+
+26. Tables:
+https://dash-simple-apps.plotly.host/dash-tableplot/
+
+27. Statistical-charts:
+https://dash-simple-apps.plotly.host/dash-statisticalplot/
+
+28. Hovertext-and-formatting:
+https://dash-simple-apps.plotly.host/dash-hoverplot/
