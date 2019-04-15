@@ -31,7 +31,7 @@ app.layout = html.Div([
             ],
             multi=True,
             value=["Mean_TemperatureC"], )
-    ],className="row",style={"display":"block","width":"60%","margin-left":"auto","margin-right":"auto"}),
+    ], className="row", style={"display": "block", "width": "60%", "margin-left": "auto", "margin-right": "auto"}),
     html.Div([
         dcc.Graph(id="my-graph")]),
     html.Div([
@@ -93,6 +93,8 @@ def update_figure(selected, year):
 
     }
 
+
+server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
