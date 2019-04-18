@@ -19,7 +19,7 @@ app = dash.Dash(__name__)
 app.layout = html.Div([
     html.Div([
         html.H1("Basic Charts")
-    ], className="row", style={'textAlign': "center", "border": "1px solid black", "padding": 5,
+    ], className="row", style={'textAlign': "center",  "padding": 5,
                                "margin-left": "auto", "margin-right": "auto", "width": "60%"}),
     html.Div([
         html.Div([
