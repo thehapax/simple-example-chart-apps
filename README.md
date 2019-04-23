@@ -86,3 +86,9 @@ https://dash-simple-apps.plotly.host/dash-statisticalplot/
 
 28. Hovertext-and-formatting:
 https://dash-simple-apps.plotly.host/dash-hoverplot/
+
+29. 3D Plots:
+https://dash-simple-apps.plotly.host/dash-3dplot/
+
+30. Animation:
+https://dash-simple-apps.plotly.host/dash-animationplot/
