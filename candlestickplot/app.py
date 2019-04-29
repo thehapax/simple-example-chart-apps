@@ -5,7 +5,6 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-
 df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/tesla-stock-price.csv")
 df['year'] = pd.DatetimeIndex(df['date']).year
 
@@ -35,21 +34,21 @@ app.layout = html.Div([
     [Input("select-range", 'value')])
 def update_figure(selected):
     dff = df[(df["year"] >= selected[0]) & (df["year"] <= selected[1])]
-    trace = go.Ohlc(x=dff['date'],
-                    open=dff['open'],
-                    high=dff['high'],
-                    low=dff['low'],
-                    close=dff['close'],
-                    increasing={'line': {'color': '#00CC94'}},
-                    decreasing={'line': {'color': '#F50030'}}
-                    )
+    trace = go.Candlestick(x=dff['date'],
+                           open=dff['open'],
+                           high=dff['high'],
+                           low=dff['low'],
+                           close=dff['close'],
+                           increasing={'line': {'color': '#00CC94'}},
+                           decreasing={'line': {'color': '#F50030'}}
+                           )
 
     return {
         'data': [trace],
         'layout': go.Layout(
             title=f"Stock Values for the period:{'-'.join(str(i) for i in selected)}",
             xaxis={
-                
+
                 'rangeslider': {'visible': False},
                 'autorange': "reversed",
             },
