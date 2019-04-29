@@ -14,18 +14,33 @@ app.layout = html.Div([
         'textAlign': "center"
     }),
     html.Div([
-        html.Span("Number of nodes : ", className="six columns", style={"text-align": "right"}),
-        dcc.RadioItems(
-            id='nodes',
-            options=[{'label': i, 'value': i} for i in [30, 50, 80, 100]],
-            value=80,
-            labelStyle={'display': 'inline-block', "padding-left": 5,"padding-right": 5},
-            className="six columns"
-        )
-    ], className="row",
-        style={"margin-right": "auto", "margin-left": "auto", "display": "block", "width": "80%", "padding": 20}),
-    html.Div([
         dcc.Graph(id="my-graph", )]),
+    html.Div([
+        html.Span("Slide to change number of nodes", style={"text-align": "center", 'padding': 10}, className="row"),
+        dcc.Slider(
+            id="nodes",
+            min=5,
+            max=50,
+            value=30,
+            step=2,
+            updatemode="drag",
+            marks={
+                5: "5",
+                10: "10",
+                20: "20",
+                30: "30",
+                40: "40",
+                50: "50",
+            },
+            className="row"
+        )], style={
+        "display": "block",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "width": "40%",
+        "padding": 20
+    }
+    )
 
 ], className="container")
 
