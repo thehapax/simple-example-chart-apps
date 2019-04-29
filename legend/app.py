@@ -1,5 +1,4 @@
 import re
-
 import dash
 import dash_core_components as dcc
 import dash_daq as daq

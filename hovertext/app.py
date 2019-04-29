@@ -32,7 +32,7 @@ app.layout = html.Div([
                         min=df['ReportYear'].min(),
                         max=df['ReportYear'].max(),
                         value=[1999, 2000],
-                        marks={str(year): year for year in df['ReportYear'].unique()}
+                        marks={ str(year) : str(year) for year in df['ReportYear'].unique()}
                         )
     ], className="row", style={"margin": 20, "padding": 30}),
     html.Div([

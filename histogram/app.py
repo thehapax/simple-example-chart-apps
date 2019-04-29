@@ -28,9 +28,9 @@ app.layout = html.Div([
     html.Div([
         dcc.RadioItems(
             id="select-survival",
-            options=[{'label': "Survived", 'value': 1},
-                     {'label': "Dead", 'value': 0}],
-            value=1,
+            options=[{'label': "Survived", 'value': str(1)},
+                     {'label': "Dead", 'value': str(0)}],
+            value= str(1),
             labelStyle={'display': 'inline-block',
                         'padding': 10}
         )
@@ -54,7 +54,7 @@ app.layout = html.Div([
      dash.dependencies.Input("hist-graph", "hoverData")]
 )
 def update_scatter(selected, hoverdata):
-    dff = df[df["Survived"] == selected]
+    dff = df[df["Survived"] == int(selected)]
     trace = []
     for sex in ["male", "female"]:
         trace.append(go.Scatter(
@@ -127,7 +127,7 @@ def update_scatter(selected, hoverdata):
      ]
 )
 def update_graph(selected, hoverdata1):
-    dff = df[df["Survived"] == selected]
+    dff = df[df["Survived"] == int(selected)]
     age = hoverdata1["points"][0]['customdata']
     trace = go.Histogram(
         x=dff["Age"],

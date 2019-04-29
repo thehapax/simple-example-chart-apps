@@ -22,6 +22,20 @@ app.layout = html.Div([
     ], className="row", style={'textAlign': "center",  "padding": 5,
                                "margin-left": "auto", "margin-right": "auto", "width": "60%"}),
     html.Div([
+            html.Span("Type Of Plot", style={'textAlign': "center", "display": "block"}),
+            dcc.Dropdown(
+                id='plot-selected',
+                options=[{"label": i, 'value': i} for i in
+                         ["Scatter Plot", "Line plot", "Bar plot", "Horizontal Bar", "Pie plot", "Table",
+                          "Filled Area Plot"]],
+                value="Scatter Plot",
+            )
+        ], className="row", style={"display": "block",
+                                   "margin-left": "auto",
+                                   "margin-right": "auto",
+                                   "width": "40%",
+                                   "padding": 20}),
+    html.Div([
         html.Div([
             html.Span("X-Axis : Scatter,Horizontal Barplot,Filledarea,Table",
                       style={'textAlign': "center", "display": "block"}),
@@ -44,20 +58,7 @@ app.layout = html.Div([
     html.Div([
         dcc.Graph(id="my-graph"),
     ], className="row", style={"padding": 30}),
-    html.Div([
-        html.Span("Type Of Plot", style={'textAlign': "center", "display": "block"}),
-        dcc.Dropdown(
-            id='plot-selected',
-            options=[{"label": i, 'value': i} for i in
-                     ["Scatter Plot", "Line plot", "Bar plot", "Horizontal Bar", "Pie plot", "Table",
-                      "Filled Area Plot"]],
-            value="Scatter Plot",
-        )
-    ], className="row", style={"display": "block",
-                               "margin-left": "auto",
-                               "margin-right": "auto",
-                               "width": "60%",
-                               "padding": 20}),
+
 ], className="container")
 
 

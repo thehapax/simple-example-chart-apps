@@ -92,8 +92,8 @@ app.layout = html.Div([
                                       max=500,
                                       step=10,
                                       updatemode="drag",
-                                      value=[0, 50],
-                                      marks={i * 50: i * 50 for i in range(0, 11)}),
+                                      value=[2, 50],
+                                      marks={i * 50: str(i * 50) for i in range(0, 11)}),
                       ], className="column", style={"margin": 0, "padding": 10})
         ], className="row", style={"padding": 15}),
 
