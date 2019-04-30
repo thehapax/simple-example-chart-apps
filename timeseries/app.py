@@ -93,7 +93,7 @@ def update_graph(selected_dropdown_value):
     return figure
 
 
-server = app.server
+server = app.server # the Flask app
 
 if __name__ == '__main__':
     app.run_server(debug=True)

@@ -124,7 +124,7 @@ def update_graph(x_axis, y_axis, legend, position, n_clicks, xvalue, yvalue):
     }
 
 
-server = app.server
+server = app.server # the Flask app
 
 if __name__ == '__main__':
     app.run_server(debug=True)

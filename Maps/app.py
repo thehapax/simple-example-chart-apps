@@ -201,7 +201,7 @@ def update_graph(type):
         }
 
 
-server = app.server
+server = app.server # the Flask app
 
 if __name__ == '__main__':
     app.run_server(debug=True)

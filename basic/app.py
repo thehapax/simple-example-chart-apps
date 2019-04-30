@@ -203,7 +203,7 @@ def update_graph(x_axis, y_axis, plot):
         }
 
 
-server = app.server
+server = app.server # the Flask app
 
 if __name__ == '__main__':
     app.run_server(debug=True)

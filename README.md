@@ -92,3 +92,6 @@ https://dash-simple-apps.plotly.host/dash-3dplot/
 
 30. Animation:
 https://dash-simple-apps.plotly.host/dash-animationplot/
+
+31. Network-Graph
+https://dash-simple-apps.plotly.host/dash-networkplot/

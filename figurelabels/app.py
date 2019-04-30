@@ -150,7 +150,7 @@ def update_figure(selected_type, selected_color, selected_font, size):
     }
 
 
-server = app.server
+server = app.server # the Flask app
 
 if __name__ == '__main__':
     app.run_server(debug=True)
