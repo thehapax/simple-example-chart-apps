@@ -15,86 +15,52 @@ font = ["Arial", "Open Sans", "Balto", "Courier New", "PT Sans Narrow", "Times N
         "cursive"]
 
 app.layout = html.Div([
-    html.Div([
-        html.H1("Financial Statistics by Age")
+    html.Div([html.H1("Financial Statistics by Age")], style={'textAlign': "center"}),
+    html.Div([html.Div([html.Div([daq.ColorPicker(id='my-color-picker', label='Select Color : Marker & Title',
+                                                  value={"hex": "#E6738D"}, )], className="row",
+                                 style={"margin-left": "auto", "margin-right": "auto", "width": "100%", "padding": 20}),
 
-    ], style={
-        'textAlign': "center"
-    }),
+                        html.Div([html.Span("Select Font Style : ", className="six columns",
+                                            style={"width": "50%", "text-align": "right", "padding": 5}),
+                                  dcc.Dropdown(id="select-font", options=[{'label': i, 'value': i} for i in font],
+                                               value="Open Sans", placeholder="Select a font",
+                                               style={"display": "block", "margin-left": "auto", "margin-right": "auto",
+                                                      "width": "87%"},
+                                               className="six columns")], className="row",
+                                 style={"display": "block", "margin-left": "auto", "margin-right": "auto",
+                                        "width": "80%", "padding": 20}),
+                        html.Div([html.Span("Input Font Size : ", className="six columns",
+                                            style={"width": "50%", "text-align": "right", "padding": 5}),
+                                  dcc.Input(id='size-input', type='number', value=15, className="six columns",
+                                            style={"margin-left": "auto", "margin-right": "auto", "width": "45%"}),
+                                  ], className="row",
+                                 style={"display": "block", "margin-left": "auto", "margin-right": "auto",
+                                        "width": "80%", "padding": 20}),
 
-    html.Div([
-        html.Div([
+                        ], className="six columns"),
+              html.Div([html.Div([html.Div([html.Span("Category :", className="five columns",
+                                                      style={"width": 100, "text-align": "right", "padding-top": 15}),
+                                            html.Div(dcc.Dropdown(id="selected-type", value='MonthlyIncome',
+                                                                  options=
+                                                                  [{'label': "Past-due ( 30-59days )",
+                                                                    'value': 'NumberOfTime30-59DaysPastDueNotWorse'},
+                                                                   {'label': "Debt-ratio", 'value': 'DebtRatio'},
+                                                                   {'label': "Income", 'value': 'MonthlyIncome'},
+                                                                   {'label': "Open Credits/loans",
+                                                                    'value': 'NumberOfOpenCreditLinesAndLoans'},
+                                                                   {'label': "Past-due ( 90 days )",
+                                                                    'value': 'NumberOfTimes90DaysLate'},
+                                                                   {'label': "Real estate loans",
+                                                                    'value': 'NumberRealEstateLoansOrLines'},
+                                                                   {'label': "Past-due ( 60-89 days )",
+                                                                    'value': 'NumberOfTime60-89DaysPastDueNotWorse'},
+                                                                   {'label': "Dependents",
+                                                                    'value': 'NumberOfDependents'}],
 
-            html.Div([
-                daq.ColorPicker(
-                    id='my-color-picker',
-                    label='Select Color : Marker & Title',
-                    value={"hex": "#E6738D"},
-                )], className="row", style={"margin-left": "auto",
-                                            "margin-right": "auto",
-                                            "width": "100%", "padding": 20}),
-
-            html.Div([
-                html.Span("Select Font Style : ", className="six columns",
-                          style={"width":"50%", "text-align": "right", "padding": 5}),
-                dcc.Dropdown(id="select-font",
-                             options=[{'label': i, 'value': i} for i in font],
-                             value="Open Sans",
-                             placeholder="Select a font",
-                             style={
-                                 "display": "block",
-                                 "margin-left": "auto",
-                                 "margin-right": "auto",
-                                 "width": "87%"
-                             },
-                             className="six columns"
-                             )], className="row", style={"display": "block",
-                                                         "margin-left": "auto",
-                                                         "margin-right": "auto",
-                                                         "width": "80%",
-                                                         "padding": 20
-                                                         }),
-            html.Div([
-                html.Span("Input Font Size : ", className="six columns",
-                          style={"width": "50%", "text-align": "right", "padding": 5}),
-                dcc.Input(id='size-input', type='number', value=15, className="six columns",
-                            style={"margin-left": "auto",
-                                     "margin-right": "auto",
-                                     "width": "45%"}),
-
-            ], className="row", style={"display": "block",
-                                       "margin-left": "auto",
-                                       "margin-right": "auto",
-                                       "width": "80%",
-                                       "padding": 20
-                                       }),
-
-        ], className="six columns"),
-        html.Div([
-            html.Div([
-                html.Div([
-                    html.Span("Category :", className="five columns",
-                              style={"width": 100, "text-align": "right", "padding-top": 15}),
-                    html.Div(dcc.Dropdown(
-                        id="selected-type",
-                        options=[
-                            {'label': "Past-due ( 30-59days )", 'value': 'NumberOfTime30-59DaysPastDueNotWorse'},
-                            {'label': "Debt-ratio", 'value': 'DebtRatio'},
-                            {'label': "Income", 'value': 'MonthlyIncome'},
-                            {'label': "Open Credits/loans", 'value': 'NumberOfOpenCreditLinesAndLoans'},
-                            {'label': "Past-due ( 90 days )", 'value': 'NumberOfTimes90DaysLate'},
-                            {'label': "Real estate loans", 'value': 'NumberRealEstateLoansOrLines'},
-                            {'label': "Past-due ( 60-89 days )", 'value': 'NumberOfTime60-89DaysPastDueNotWorse'},
-                            {'label': "Dependents", 'value': 'NumberOfDependents'}
-                        ],
-                        value='MonthlyIncome',
-                    ), className="seven columns", style={"width": "60%", "margin": 0, "padding": 10})], className="row",
-                    style={"margin": 10, "padding": 10}),
-
-                dcc.Graph(id="my-graph", className="row")], className="six columns"),
-        ])
-    ])
-
+                                                                  ), className="seven columns",
+                                                     style={"width": "60%", "margin": 0, "padding": 10})],
+                                           className="row", style={"margin": 10, "padding": 10}),
+                                  dcc.Graph(id="my-graph", className="row")], className="six columns"), ])])
 ], className="container")
 
 

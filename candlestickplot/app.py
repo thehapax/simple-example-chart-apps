@@ -11,21 +11,10 @@ df['year'] = pd.DatetimeIndex(df['date']).year
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    html.Div([
-        html.H1("Tesla Stock Price")
-
-    ], style={'textAlign': "center"}),
-
+    html.Div([html.H1("Tesla Stock Price")], style={'textAlign': "center"}),
     dcc.Graph(id="my-graph"),
-    html.Div([
-        dcc.RangeSlider(id="select-range",
-                        marks={i: '{}'.format(i) for i in df.year.unique().tolist()},
-                        min=df.year.min(),
-                        max=df.year.max(),
-                        value=[2016, 2017]
-                        )], style={"padding-top": 100,
-                                   })
-
+    html.Div([dcc.RangeSlider(id="select-range",marks={i: '{}'.format(i) for i in df.year.unique().tolist()},
+                              min=df.year.min(),max=df.year.max(),value=[2016, 2017])], style={"padding-top": 100,})
 ], className="container")
 
 
@@ -34,32 +23,15 @@ app.layout = html.Div([
     [Input("select-range", 'value')])
 def update_figure(selected):
     dff = df[(df["year"] >= selected[0]) & (df["year"] <= selected[1])]
-    trace = go.Candlestick(x=dff['date'],
-                           open=dff['open'],
-                           high=dff['high'],
-                           low=dff['low'],
-                           close=dff['close'],
-                           increasing={'line': {'color': '#00CC94'}},
-                           decreasing={'line': {'color': '#F50030'}}
-                           )
-
-    return {
-        'data': [trace],
-        'layout': go.Layout(
-            title=f"Stock Values for the period:{'-'.join(str(i) for i in selected)}",
-            xaxis={
-
-                'rangeslider': {'visible': False},
-                'autorange': "reversed",
-            },
-            yaxis={
-                "title": f'Stock Price (USD)'
-            }
-
-        )}
+    trace = go.Candlestick(x=dff['date'],open=dff['open'],high=dff['high'],low=dff['low'],close=dff['close'],
+                           increasing={'line': {'color': '#00CC94'}},decreasing={'line': {'color': '#F50030'}})
+    return {'data': [trace],
+            'layout': go.Layout(title=f"Stock Values for the period:{'-'.join(str(i) for i in selected)}",
+                                xaxis={'rangeslider': {'visible': False},'autorange': "reversed",},
+                                yaxis={"title": f'Stock Price (USD)'})}
 
 
-server = app.server # the Flask app
+server = app.server  # Expose server variable for dash deployment server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
