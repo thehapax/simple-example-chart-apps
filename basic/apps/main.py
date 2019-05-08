@@ -13,7 +13,6 @@ else:
 
 df = pd.read_csv('https://raw.githubusercontent.com/divyachandran-ds/dataset/master/diabetes.csv')
 
-
 layout = html.Div([
     html.Div([html.H1("Basic Charts")], className="row", style={'textAlign':"center", "padding": 5,"margin-left":"auto",
                                                                 "margin-right": "auto", "width": "60%"}),
