@@ -13,7 +13,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Emiss
 if 'DYNO' in os.environ:
     app_name = os.environ['DASH_APP_NAME']
 else:
-    app_name = 'dash-barplot'
+    app_name = 'dash-boxplot'
 
 layout = html.Div([html.Div([
         html.H1("Greenhouse Gas Emissions by Continent")], style={"textAlign": "center"}),

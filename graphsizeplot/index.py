@@ -21,10 +21,8 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname is None or pathname.replace(app_name, '').strip('/') == '':
         return main.layout
-    elif pathname.replace(app_name, '').strip('/') == 'code':
-        return code.layout
     else:
-        return main.layout
+        return code.layout
 
 
 if __name__ == '__main__':
