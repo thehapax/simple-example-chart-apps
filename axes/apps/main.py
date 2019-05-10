@@ -10,7 +10,7 @@ from app import app
 if 'DYNO' in os.environ:
     app_name = os.environ['DASH_APP_NAME']
 else:
-    app_name = 'dash-3dsurfaceplot'
+    app_name = 'dash-axesplot'
 
 df = pd.read_csv("https://raw.githubusercontent.com/divyachandran-ds/Datascience/master/bchealth.csv")
 font = ["Arial", "Open Sans", "Balto", "Courier New", "PT Sans Narrow", "Times New Roman", "Comic Sans MS",
