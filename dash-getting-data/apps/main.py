@@ -51,7 +51,7 @@ def update_graph(values):
         margin=dict(t=40),
         annotations=[dict(
             text='<a href="https://catalog.data.gov/dataset/grain-transportation-report-figure-8">Source Data</a>',
-            x=1,
+            x=0,
             y=1.1,
             xref='paper',
             yref='paper',
