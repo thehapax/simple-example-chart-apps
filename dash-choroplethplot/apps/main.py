@@ -10,7 +10,7 @@ import plotly.graph_objs as go
 
 from app import app
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder_with_codes.csv')
+df = pd.read_csv('apps/gapminder_with_codes.csv')
 
 
 if 'DYNO' in os.environ:
